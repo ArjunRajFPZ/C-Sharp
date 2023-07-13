@@ -1,0 +1,17 @@
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\SqliteTaskbookConsoleApp.exe.config
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\SqliteTaskbookConsoleApp.exe
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\SqliteTaskbookConsoleApp.pdb
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\EntityFramework.dll
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\System.Data.SQLite.dll
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\EntityFramework.xml
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\bin\Debug\System.Data.SQLite.xml
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\obj\Debug\SqliteTaskbookConsoleApp.csproj.AssemblyReference.cache
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\obj\Debug\SqliteTaskbookConsoleApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\obj\Debug\SqliteTaskbookConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\obj\Debug\SqliteTaskbookConsoleApp.csproj.CopyComplete
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\obj\Debug\SqliteTaskbookConsoleApp.exe
+C:\Users\Arjun\Desktop\C#\SqliteTaskbookConsoleApp\obj\Debug\SqliteTaskbookConsoleApp.pdb
