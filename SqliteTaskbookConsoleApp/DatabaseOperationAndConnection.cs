@@ -1,7 +1,6 @@
-using System;
+﻿using System;
 using System.Data.SQLite;
 using System.IO;
-using System.Reflection;
 
 namespace SqliteTaskbookConsoleApp
 {
@@ -28,13 +27,13 @@ namespace SqliteTaskbookConsoleApp
             else
             {
                 sqliteConnection = new SQLiteConnection("Data Source=TaskBookDatabase.sqlite;Version=3;");
-            } 
+            }
             #endregion
         }
         public void InsertIntoTable()
         {
             #region UI for data insertion
-            string name = "", assignedfrom = "", assignedto = "", assigneddate = "", taskduration = "", status = "";
+            string name, assignedfrom, assignedto, assigneddate, taskduration, status;
             Console.WriteLine("\n-------------------------");
             Console.Write("Enter the task name     : ");
             name = Console.ReadLine();
@@ -42,6 +41,7 @@ namespace SqliteTaskbookConsoleApp
             assignedfrom = Console.ReadLine();
             Console.Write("Task assigned to        : ");
             assignedto = Console.ReadLine();
+            Console.Write("Enter date in (dd/mm/yyyy) format\n");
             Console.Write("Task assigned date      : ");
             assigneddate = Console.ReadLine();
             Console.Write("Enter the task duration : ");
@@ -52,18 +52,25 @@ namespace SqliteTaskbookConsoleApp
 
             #region Data insertion
             command = new SQLiteCommand();
-            try
+            if (name != "" && assignedfrom != "" && assignedto != "" && assigneddate != "" && taskduration != "" && status != "")
             {
-                sqliteConnection.Open();
-                command.Connection = sqliteConnection;
-                command.CommandText = "insert into TaskRecords(Name,Assigned_from,Assigned_to,Assigned_date,Task_duration,Status) " +
-                    "values ('" + name + "','" + assignedfrom + "','" + assignedto + "','" + assigneddate + "','" + taskduration + "','" + status + "')";
-                command.ExecuteNonQuery();
-
+                try
+                {
+                    sqliteConnection.Open();
+                    command.Connection = sqliteConnection;
+                    command.CommandText = "insert into TaskRecords(Name,Assigned_from,Assigned_to,Assigned_date,Task_duration,Status) " +
+                        "values ('" + name + "','" + assignedfrom + "','" + assignedto + "','" + assigneddate + "','" + taskduration + "','" + status + "')";
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("\nData inserted successfully");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception: " + ex.Message);
+                }
             }
-            catch(Exception ex)
+            else
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                Console.WriteLine("\nAll data fields are required please try again !");
             }
             sqliteConnection.Close();
             #endregion
@@ -72,8 +79,8 @@ namespace SqliteTaskbookConsoleApp
         {
             #region Data display
             int counter = 0;
-            command = new SQLiteCommand("Select * From TaskRecords", sqliteConnection);
             sqliteConnection.Open();
+            command = new SQLiteCommand("Select * From TaskRecords", sqliteConnection);
             dataread = command.ExecuteReader();
             Console.WriteLine("\n-------------------------\n\n\tTaskbook Records\n");
             while (dataread.Read())
@@ -87,13 +94,13 @@ namespace SqliteTaskbookConsoleApp
                 Console.WriteLine($"Task duration : {dataread[5]}");
                 Console.WriteLine($"Status        : {dataread[6]}\n");
             }
-            sqliteConnection.Close(); 
+            sqliteConnection.Close();
             #endregion
         }
         public void DeleteFromTable()
         {
             #region Take delete id UI
-            int deleteid = 0, counter = 0, userid = 0;
+            int deleteid, counter = 0, userid = 0;
             Console.Write("\nEnter the id to delete : ");
             deleteid = Convert.ToInt32(Console.ReadLine());
             #endregion
@@ -104,7 +111,6 @@ namespace SqliteTaskbookConsoleApp
             dataread = command.ExecuteReader();
             while (dataread.Read())
             {
-                counter++;
                 userid = Convert.ToInt32(dataread[0]);
             }
             if (userid == deleteid)
@@ -123,9 +129,9 @@ namespace SqliteTaskbookConsoleApp
         }
         public void UpadteToTable()
         {
-            #region Check and update data
-            int updateid = 0, counter = 0, userid = 0;
-            string name = "", assignedfrom = "", assignedto = "", assigneddate = "", taskduration = "", status = "";
+            #region Check data
+            int updateid, counter = 0, userid = 0;
+            string name, assignedfrom, assignedto, assigneddate, taskduration, status;
             Console.Write("\nEnter the id to update : ");
             updateid = Convert.ToInt32(Console.ReadLine());
             sqliteConnection.Open();
@@ -137,7 +143,7 @@ namespace SqliteTaskbookConsoleApp
                 userid = Convert.ToInt32(dataread[0]);
             }
 
-            #region UI and update
+            #region UI and data update 
             if (userid == updateid)
             {
                 Console.WriteLine("\n-------------------------");
@@ -163,8 +169,34 @@ namespace SqliteTaskbookConsoleApp
             else
             {
                 Console.WriteLine($"\nNo data with with id {updateid} found !");
-            } 
+            }
             #endregion
+
+            sqliteConnection.Close();
+            #endregion
+        }
+        public void DatewiseSelection()
+        {
+            #region Date from user UI
+            string tofinddate;
+            Console.Write("\nEnter the assign date you want to retrive task details for : ");
+            tofinddate = Console.ReadLine();
+            #endregion
+
+            #region Datewise select and display
+            sqliteConnection.Open();
+            command = new SQLiteCommand("Select * From TaskRecords Where Assigned_date = '" + tofinddate + "'", sqliteConnection);
+            dataread = command.ExecuteReader();
+            while (dataread.Read())
+            {
+                Console.WriteLine($"\nID            : {dataread[0]}");
+                Console.WriteLine($"Name          : {dataread[1]}");
+                Console.WriteLine($"Assigned from : {dataread[2]}");
+                Console.WriteLine($"Assigned to   : {dataread[3]}");
+                Console.WriteLine($"Assigned date : {dataread[4]}");
+                Console.WriteLine($"Task duration : {dataread[5]}");
+                Console.WriteLine($"Status        : {dataread[6]}\n");
+            }
             sqliteConnection.Close();
             #endregion
         }

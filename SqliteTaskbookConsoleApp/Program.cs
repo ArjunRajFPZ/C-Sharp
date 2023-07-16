@@ -1,50 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SqliteTaskbookConsoleApp
 {
     internal class Program
     {
+        static void ChoiceUI()
+        {
+            Console.WriteLine("\n\tTaskbook");
+            Console.WriteLine("-------------------------");
+            Console.WriteLine("\nSelect option");
+            Console.WriteLine("1. Insert data \n2. View data \n3. Update data \n4. Delete data \n5. Datewise view \n6. Exit");
+            Console.Write("\nEnter your choice : ");
+        }
         static void Main(string[] args)
         {
             DatabaseOperationAndConnection sqliteConnection = new DatabaseOperationAndConnection();
             sqliteConnection.CreateDatabaseAndTable();
 
             #region UI with switch condition for Taskbook
-            int choice = 0;
-            Console.WriteLine("\tTaskbook");
-            do
+            string choice;
+            bool wantToExit = false;
+            while (!wantToExit)
             {
-                Console.WriteLine("-------------------------");
-                Console.WriteLine("\nSelect option");
-                Console.WriteLine("1. Insert data \n2. View data \n3. Update data \n4. Delete data \n5. Exit");
-                Console.Write("\nEnter your choice : ");
-                choice = Convert.ToInt32(Console.ReadLine());
+                ChoiceUI();
+                choice = Console.ReadLine();
                 switch (choice)
                 {
-                    case 1:
+                    case "1":
                         sqliteConnection.InsertIntoTable();
                         break;
-                    case 2:
+                    case "2":
                         sqliteConnection.DisplayDataFromTable();
+
                         break;
-                    case 3:
+                    case "3":
                         sqliteConnection.UpadteToTable();
                         break;
-                    case 4:
+                    case "4":
                         sqliteConnection.DeleteFromTable();
                         break;
-                    case 5:
+                    case "5":
+                        sqliteConnection.DatewiseSelection();
+                        break;
+                    case "6":
                         Console.WriteLine("Ready to exit");
+                        wantToExit = true;
                         break;
                     default:
                         Console.WriteLine("Invalid input");
                         break;
                 }
-            } while (choice != 5);
+            }
             #endregion
         }
     }
