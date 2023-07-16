@@ -13,7 +13,7 @@ namespace ConsoleApp1
             string name = "", assignfrom = "", assignto = "", status = "", duration = "", date = "";
 
             Console.WriteLine("\t TASK BOOK");
-            Console.WriteLine("---------------------------------");
+            Console.WriteLine("------------------------------");
             Console.WriteLine();
             Console.WriteLine("Enter Task Name = ");
             name = Console.ReadLine();
