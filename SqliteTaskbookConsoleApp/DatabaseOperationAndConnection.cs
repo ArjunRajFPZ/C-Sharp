@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SqliteTaskbookConsoleApp
 {
@@ -30,62 +31,98 @@ namespace SqliteTaskbookConsoleApp
             }
             #endregion
         }
-        public void InsertIntoTable()
+        public void ValueValidation()
         {
-            #region UI for data insertion
+            #region Inserted value validation
             string name, assignedfrom, assignedto, assigneddate, taskduration, status;
             Console.WriteLine("\n-------------------------");
-            Console.Write("Enter the task name     : ");
+            Console.Write("Enter the task name              : ");
             name = Console.ReadLine();
-            Console.Write("Task assigned from      : ");
-            assignedfrom = Console.ReadLine();
-            Console.Write("Task assigned to        : ");
-            assignedto = Console.ReadLine();
-            Console.Write("Enter date in (dd/mm/yyyy) format\n");
-            Console.Write("Task assigned date      : ");
-            assigneddate = Console.ReadLine();
-            Console.Write("Enter the task duration : ");
-            taskduration = Console.ReadLine();
-            Console.Write("Task status             : ");
-            status = Console.ReadLine();
-            #endregion  
-
-            #region Data insertion
-            command = new SQLiteCommand();
-            if (name != "" && assignedfrom != "" && assignedto != "" && assigneddate != "" && taskduration != "" && status != "")
+            if (Regex.IsMatch(name, @"^[a-zA-Z ]+$"))
             {
-                try
+                Console.Write("Task assigned from               : ");
+                assignedfrom = Console.ReadLine();
+                if (Regex.IsMatch(assignedfrom, @"^[a-zA-Z ]+$"))
                 {
-                    sqliteConnection.Open();
-                    command.Connection = sqliteConnection;
-                    command.CommandText = "insert into TaskRecords(Name,Assigned_from,Assigned_to,Assigned_date,Task_duration,Status) " +
-                        "values ('" + name + "','" + assignedfrom + "','" + assignedto + "','" + assigneddate + "','" + taskduration + "','" + status + "')";
-                    command.ExecuteNonQuery();
-                    Console.WriteLine("\nData inserted successfully");
+                    Console.Write("Task assigned to                 : ");
+                    assignedto = Console.ReadLine();
+                    if (Regex.IsMatch(assignedto, @"^[a-zA-Z ]+$"))
+                    {
+                        Console.Write("Enter date in (dd/mm/yyyy) format\n");
+                        Console.Write("Task assigned date               : ");
+                        assigneddate = Console.ReadLine();
+                        if (Regex.IsMatch(assigneddate, @"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"))
+                        {
+                            Console.Write("Enter the task duration in hours : ");
+                            taskduration = Console.ReadLine();
+                            if (Regex.IsMatch(taskduration, @"^[0-9.]+$"))
+                            {
+                                Console.Write("Task status                      : ");
+                                status = Console.ReadLine();
+                                if (Regex.IsMatch(status, @"^[a-zA-Z ]+$"))
+                                {
+                                    InsertIntoTable(name, assignedfrom, assignedto, assigneddate, taskduration, status);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nStatus value is empty or has numbers in it ! please try again.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nTask duration value is empty or has string in it ! please try again.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nAssigned date value is empty or is not in correct format ! please try again.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nAssigned to value is empty or has numbers in it ! please try again.");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine("Exception: " + ex.Message);
+                    Console.WriteLine("\nAssigned from value is empty or has numbers in it ! please try again.");
                 }
             }
             else
             {
-                Console.WriteLine("\nAll data fields are required please try again !");
+                Console.WriteLine("\nName value is empty or has numbers in it ! please try again.");
             }
-            sqliteConnection.Close();
+            #endregion
+        }
+        public void InsertIntoTable(string name, string assignedfrom, string assignedto, string assigneddate, string taskduration, string status)
+        {
+            #region Data insertion
+            try
+            {
+                command = new SQLiteCommand();
+                sqliteConnection.Open();
+                command.Connection = sqliteConnection;
+                command.CommandText = "insert into TaskRecords(Name,Assigned_from,Assigned_to,Assigned_date,Task_duration,Status) " +
+                    "values ('" + name + "','" + assignedfrom + "','" + assignedto + "','" + assigneddate + "','" + taskduration + "','" + status + "')";
+                command.ExecuteNonQuery();
+                sqliteConnection.Close();
+                Console.WriteLine("\nData inserted successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
             #endregion
         }
         public void DisplayDataFromTable()
         {
             #region Data display
-            int counter = 0;
             sqliteConnection.Open();
             command = new SQLiteCommand("Select * From TaskRecords", sqliteConnection);
             dataread = command.ExecuteReader();
             Console.WriteLine("\n-------------------------\n\n\tTaskbook Records\n");
             while (dataread.Read())
             {
-                counter++;
                 Console.WriteLine($"ID            : {dataread[0]}");
                 Console.WriteLine($"Name          : {dataread[1]}");
                 Console.WriteLine($"Assigned from : {dataread[2]}");
@@ -100,7 +137,7 @@ namespace SqliteTaskbookConsoleApp
         public void DeleteFromTable()
         {
             #region Take delete id UI
-            int deleteid, counter = 0, userid = 0;
+            int deleteid, userid = 0;
             Console.Write("\nEnter the id to delete : ");
             deleteid = Convert.ToInt32(Console.ReadLine());
             #endregion
@@ -130,7 +167,7 @@ namespace SqliteTaskbookConsoleApp
         public void UpadteToTable()
         {
             #region Check data
-            int updateid, counter = 0, userid = 0;
+            int updateid, userid = 0;
             string name, assignedfrom, assignedto, assigneddate, taskduration, status;
             Console.Write("\nEnter the id to update : ");
             updateid = Convert.ToInt32(Console.ReadLine());
@@ -139,7 +176,6 @@ namespace SqliteTaskbookConsoleApp
             dataread = command.ExecuteReader();
             while (dataread.Read())
             {
-                counter++;
                 userid = Convert.ToInt32(dataread[0]);
             }
 

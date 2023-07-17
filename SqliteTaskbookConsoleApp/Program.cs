@@ -6,11 +6,13 @@ namespace SqliteTaskbookConsoleApp
     {
         static void ChoiceUI()
         {
+            #region Choice UI
             Console.WriteLine("\n\tTaskbook");
             Console.WriteLine("-------------------------");
             Console.WriteLine("\nSelect option");
             Console.WriteLine("1. Insert data \n2. View data \n3. Update data \n4. Delete data \n5. Datewise view \n6. Exit");
             Console.Write("\nEnter your choice : ");
+            #endregion
         }
         static void Main(string[] args)
         {
@@ -18,31 +20,32 @@ namespace SqliteTaskbookConsoleApp
             sqliteConnection.CreateDatabaseAndTable();
 
             #region UI with switch condition for Taskbook
-            string choice;
+            string userInput;
+            int choice;
             bool wantToExit = false;
             while (!wantToExit)
             {
                 ChoiceUI();
-                choice = Console.ReadLine();
+                userInput = Console.ReadLine();
+                int.TryParse(userInput, out choice);
                 switch (choice)
                 {
-                    case "1":
-                        sqliteConnection.InsertIntoTable();
+                    case 1:
+                        sqliteConnection.ValueValidation();
                         break;
-                    case "2":
+                    case 2:
                         sqliteConnection.DisplayDataFromTable();
-
                         break;
-                    case "3":
+                    case 3:
                         sqliteConnection.UpadteToTable();
                         break;
-                    case "4":
+                    case 4:
                         sqliteConnection.DeleteFromTable();
                         break;
-                    case "5":
+                    case 5:
                         sqliteConnection.DatewiseSelection();
                         break;
-                    case "6":
+                    case 6:
                         Console.WriteLine("Ready to exit");
                         wantToExit = true;
                         break;
