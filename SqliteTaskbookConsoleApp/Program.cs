@@ -31,13 +31,13 @@ namespace SqliteTaskbookConsoleApp
                 switch (choice)
                 {
                     case 1:
-                        sqliteConnection.ValueValidation();
+                        sqliteConnection.InsertValueValidation();
                         break;
                     case 2:
                         sqliteConnection.DisplayDataFromTable();
                         break;
                     case 3:
-                        sqliteConnection.UpadteToTable();
+                        sqliteConnection.UpadteValueValidation();
                         break;
                     case 4:
                         sqliteConnection.DeleteFromTable();

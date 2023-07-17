@@ -2,6 +2,8 @@
 using System.Data.SQLite;
 using System.IO;
 using System.Text.RegularExpressions;
+using static System.Data.Entity.Infrastructure.Design.Executor;
+using System.Xml.Linq;
 
 namespace SqliteTaskbookConsoleApp
 {
@@ -31,7 +33,7 @@ namespace SqliteTaskbookConsoleApp
             }
             #endregion
         }
-        public void ValueValidation()
+        public void InsertValueValidation()
         {
             #region Inserted value validation
             string name, assignedfrom, assignedto, assigneddate, taskduration, status;
@@ -164,53 +166,98 @@ namespace SqliteTaskbookConsoleApp
             sqliteConnection.Close();
             #endregion
         }
-        public void UpadteToTable()
+        public void UpadteValueValidation()
         {
-            #region Check data
-            int updateid, userid = 0;
-            string name, assignedfrom, assignedto, assigneddate, taskduration, status;
+            #region Check id and data validation
+            int updateid;
             Console.Write("\nEnter the id to update : ");
             updateid = Convert.ToInt32(Console.ReadLine());
             sqliteConnection.Open();
-            command = new SQLiteCommand("Select ID From TaskRecords", sqliteConnection);
+            command = new SQLiteCommand("Select ID From TaskRecords Where ID ='" + updateid + "'", sqliteConnection);
             dataread = command.ExecuteReader();
-            while (dataread.Read())
+            if(dataread.Read() != false)
             {
-                userid = Convert.ToInt32(dataread[0]);
-            }
-
-            #region UI and data update 
-            if (userid == updateid)
-            {
-                Console.WriteLine("\n-------------------------");
-                Console.Write("Enter the task name     : ");
-                name = Console.ReadLine();
-                Console.Write("Task assigned from      : ");
-                assignedfrom = Console.ReadLine();
-                Console.Write("Task assigned to        : ");
-                assignedto = Console.ReadLine();
-                Console.Write("Task assigned date      : ");
-                assigneddate = Console.ReadLine();
-                Console.Write("Enter the task duration : ");
-                taskduration = Console.ReadLine();
-                Console.Write("Task status             : ");
-                status = Console.ReadLine();
-                command = sqliteConnection.CreateCommand();
-                command.CommandText = String.Format
-                                    ("UPDATE TaskRecords SET Name='" + name + "',Assigned_from='" + assignedfrom + "',Assigned_to='" + assignedto + "'," +
-                                    "Assigned_date='" + assigneddate + "',Task_duration='" + taskduration + "',Status='" + status + "' WHERE ID={0}", updateid);
-                command.ExecuteNonQuery();
-                Console.WriteLine($"\nData updated to id : {updateid}.");
+                UpdateIntoTable(updateid);
             }
             else
             {
-                Console.WriteLine($"\nNo data with with id {updateid} found !");
-            }
-            #endregion
 
+                Console.Write($"\nNo data for the id {updateid} found !\n");
+            }
+            
             sqliteConnection.Close();
             #endregion
         }
+        public void UpdateIntoTable(int updateid)
+        {
+            #region Data validation and update
+            string name, assignedfrom, assignedto, assigneddate, taskduration, status;
+            Console.WriteLine("\n-------------------------");
+            Console.Write("Enter the task name              : ");
+            name = Console.ReadLine();
+            if (Regex.IsMatch(name, @"^[a-zA-Z ]+$"))
+            {
+                Console.Write("Task assigned from               : ");
+                assignedfrom = Console.ReadLine();
+                if (Regex.IsMatch(assignedfrom, @"^[a-zA-Z ]+$"))
+                {
+                    Console.Write("Task assigned to                 : ");
+                    assignedto = Console.ReadLine();
+                    if (Regex.IsMatch(assignedto, @"^[a-zA-Z ]+$"))
+                    {
+                        Console.Write("Enter date in (dd/mm/yyyy) format\n");
+                        Console.Write("Task assigned date               : ");
+                        assigneddate = Console.ReadLine();
+                        if (Regex.IsMatch(assigneddate, @"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"))
+                        {
+                            Console.Write("Enter the task duration in hours : ");
+                            taskduration = Console.ReadLine();
+                            if (Regex.IsMatch(taskduration, @"^[0-9.]+$"))
+                            {
+                                Console.Write("Task status                      : ");
+                                status = Console.ReadLine();
+                                if (Regex.IsMatch(status, @"^[a-zA-Z ]+$"))
+                                {
+                                    command = new SQLiteCommand();
+                                    command = sqliteConnection.CreateCommand();
+                                    command.CommandText = String.Format
+                                                        ("UPDATE TaskRecords SET Name='" + name + "',Assigned_from='" + assignedfrom + "',Assigned_to='" + assignedto + "'," +
+                                                        "Assigned_date='" + assigneddate + "',Task_duration='" + taskduration + "',Status='" + status + "' WHERE ID={0}", updateid);
+                                    command.ExecuteNonQuery();
+                                    Console.WriteLine($"\nData updated to id : {updateid}.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nStatus value is empty or has numbers in it ! please try again.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nTask duration value is empty or has string in it ! please try again.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nAssigned date value is empty or is not in correct format ! please try again.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nAssigned to value is empty or has numbers in it ! please try again.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nAssigned from value is empty or has numbers in it ! please try again.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nName value is empty or has numbers in it ! please try again.");
+            } 
+            #endregion
+        }
+       
         public void DatewiseSelection()
         {
             #region Date from user UI
