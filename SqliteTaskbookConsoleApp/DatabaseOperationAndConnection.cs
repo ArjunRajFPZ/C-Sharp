@@ -2,8 +2,6 @@
 using System.Data.SQLite;
 using System.IO;
 using System.Text.RegularExpressions;
-using static System.Data.Entity.Infrastructure.Design.Executor;
-using System.Xml.Linq;
 
 namespace SqliteTaskbookConsoleApp
 {
@@ -63,7 +61,7 @@ namespace SqliteTaskbookConsoleApp
                                 status = Console.ReadLine();
                                 if (Regex.IsMatch(status, @"^[a-zA-Z ]+$"))
                                 {
-                                    InsertIntoTable(name, assignedfrom, assignedto, assigneddate, taskduration, status);
+                                    InsertData(name, assignedfrom, assignedto, assigneddate, taskduration, status);
                                 }
                                 else
                                 {
@@ -96,7 +94,7 @@ namespace SqliteTaskbookConsoleApp
             }
             #endregion
         }
-        public void InsertIntoTable(string name, string assignedfrom, string assignedto, string assigneddate, string taskduration, string status)
+        public void InsertData(string name, string assignedfrom, string assignedto, string assigneddate, string taskduration, string status)
         {
             #region Data insertion
             try
@@ -129,7 +127,7 @@ namespace SqliteTaskbookConsoleApp
                 Console.WriteLine($"Name          : {dataread[1]}");
                 Console.WriteLine($"Assigned from : {dataread[2]}");
                 Console.WriteLine($"Assigned to   : {dataread[3]}");
-                Console.WriteLine($"Assigned date : {dataread[4]}");
+                Console.WriteLine($"Assigned date from: {dataread[4]}");
                 Console.WriteLine($"Task duration : {dataread[5]}");
                 Console.WriteLine($"Status        : {dataread[6]}\n");
             }
@@ -139,20 +137,16 @@ namespace SqliteTaskbookConsoleApp
         public void DeleteFromTable()
         {
             #region Take delete id UI
-            int deleteid, userid = 0;
+            int deleteid;
             Console.Write("\nEnter the id to delete : ");
             deleteid = Convert.ToInt32(Console.ReadLine());
             #endregion
 
             #region Check id and delete data
-            command = new SQLiteCommand("Select ID From TaskRecords", sqliteConnection);
+            command = new SQLiteCommand("Select ID From TaskRecords where ID ='" + deleteid + "'", sqliteConnection);
             sqliteConnection.Open();
             dataread = command.ExecuteReader();
-            while (dataread.Read())
-            {
-                userid = Convert.ToInt32(dataread[0]);
-            }
-            if (userid == deleteid)
+            if (dataread.Read() != false)
             {
                 command = sqliteConnection.CreateCommand();
                 command.CommandText = String.Format("Delete FROM TaskRecords WHERE ID={0}", deleteid);
@@ -175,16 +169,14 @@ namespace SqliteTaskbookConsoleApp
             sqliteConnection.Open();
             command = new SQLiteCommand("Select ID From TaskRecords Where ID ='" + updateid + "'", sqliteConnection);
             dataread = command.ExecuteReader();
-            if(dataread.Read() != false)
+            if (dataread.Read() != false)
             {
                 UpdateIntoTable(updateid);
             }
             else
             {
-
                 Console.Write($"\nNo data for the id {updateid} found !\n");
             }
-            
             sqliteConnection.Close();
             #endregion
         }
@@ -254,10 +246,10 @@ namespace SqliteTaskbookConsoleApp
             else
             {
                 Console.WriteLine("\nName value is empty or has numbers in it ! please try again.");
-            } 
+            }
             #endregion
         }
-       
+
         public void DatewiseSelection()
         {
             #region Date from user UI
