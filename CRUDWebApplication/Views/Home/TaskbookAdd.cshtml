@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Form";
+}
+
+<html>
+<head>
+    <style>
+        form{
+            display: flex;
+            justify-content: center;
+        }
+        input[type=text], [type=date], [type=number], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid;
+            border-radius: 4px;
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="">
+        <div style="width:50%">
+            Task Name:<br />
+            <input type="text" name="TaskName" value="" required/><br />
+
+            Task Assined From:<br />
+            <input type="text" name="TaskAssinedFrom" value="" required/><br />
+
+            Task Assined To:<br />
+            <input type="text" name="TaskAssinedTo" value="" required/><br />
+
+            Task Assined Date:<br />
+            <input type="date" name="TaskAssinedDate" value="" required/><br />
+
+            Task Duration:<br />
+            <input type="number" name="TaskDuration" value="" required /><br />
+
+            <label>Choose a Status:</label><br />
+            <select name="TaskStatus" required>
+                <option value="">Select Status</option>
+                <option value="completed">Completed</option>
+                <option value="ongoing">On Going</option>
+                <option value="fixing">Fixing</option>
+            </select><br />
+
+            <input type="submit" value="Submit" class="submit" />
+        </div>
+    </form>
+</body>
+</html>
