@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Form";
+}
+
+<html>
+<head>
+    <style>
+        form{
+            display: flex;
+            justify-content: center;
+        }
+        input[type=text], [type=date], [type=tel], textarea {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type=email], [type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid;
+            border-radius: 4px;
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="">
+        <div style="width:40%">
+            <h1 align="center">Registration</h1>
+            <label>Enter Username:</label><br />
+            <input type="text" name="username" id="username" placeholder="username" required /><br />
+
+	        <label>Enter DOB:</label><br />
+            <input type="date" name="dob" id="dob" required /><br />
+
+            <label>Enter Phone:</label><br />
+            <input type="tel" name="phone" id="phone" placeholder="eg:- 0123456789" pattern="[0-9]{10}" required><br>
+
+            <label>Enter Address:</label><br />
+            <textarea name="address" id="address" rows="4" cols="50"></textarea>
+
+            <label>Enter Email:</label><br />
+            <input type="email" name="email" id="email" placeholder="eg:- abc@gmail.com" required /><br />
+
+            <label>Enter Password:</label><br />
+            <input type="password" name="password" id="password" required /><br />
+
+            <label>Enter Confirm Password:</label><br />
+            <input type="password" name="confirmpassword" id="confirmpassword" required /><br />
+            
+            <input type="submit" value="Submit" class="submit" />
+        </div>
+    </form>
+</body>
+</html>

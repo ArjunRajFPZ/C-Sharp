@@ -29,25 +29,26 @@
 </head>
 <body>
     <form method="post" action="">
-        <div style="width:50%">
-            Task Name:<br />
-            <input type="text" name="TaskName" value="" required/><br />
+        <div style="width:40%">
+            <h1 align="center">Add Task</h1>
+            <lable>Task Name:</lable><br />
+            <input type="text" name="taskname" id="taskname" placeholder="task name" required /><br />
 
-            Task Assined From:<br />
-            <input type="text" name="TaskAssinedFrom" value="" required/><br />
+            <lable>Task Assined From:</lable><br />
+            <input type="text" name="taskassinedfrom" id="taskassinedfrom" placeholder="assigned from" required /><br />
 
-            Task Assined To:<br />
-            <input type="text" name="TaskAssinedTo" value="" required/><br />
+            <lable>Task Assined To:</lable><br />
+            <input type="text" name="taskassinedto" id="taskassinedto" placeholder="assigned to" required /><br />
 
-            Task Assined Date:<br />
-            <input type="date" name="TaskAssinedDate" value="" required/><br />
+            <lable>Task Assined Date:</lable><br />
+            <input type="date" name="taskassineddate" id="taskassineddate" required /><br />
 
-            Task Duration:<br />
-            <input type="number" name="TaskDuration" value="" required /><br />
+            <lable>Task Duration:</lable><br />
+            <input type="number" name="taskduration" id="taskduration" placeholder="number of hours" required /><br />
 
             <label>Choose a Status:</label><br />
-            <select name="TaskStatus" required>
-                <option value="">Select Status</option>
+            <select name="taskdtatus" id="taskdtatus" required>
+                <option value="" disabled selected>select your option</option>
                 <option value="completed">Completed</option>
                 <option value="ongoing">On Going</option>
                 <option value="fixing">Fixing</option>

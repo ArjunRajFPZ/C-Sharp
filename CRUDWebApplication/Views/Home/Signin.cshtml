@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<html>
+<head>
+    <style>
+        form{
+            display: flex;
+            justify-content: center;
+        }
+        input[type=email], [type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border: 1px solid;
+            border-radius: 4px;
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="">
+        <div style="width:40%">
+	    <h1 align="center">Login</h1>
+            <lable>Enter Email:</lable><br />
+            <input type="email" name="email" id="email" placeholder="eg:- abc@gmail.com" required /><br />
+
+            <lable>Enter Password:</lable><br />
+            <input type="password" name="password" id="password" required/><br />
+
+            <a href="Registration">Don't Have an Account ? Create Account</a><br />
+
+            <input type="submit" value="Sign in" class="submit" />
+        </div>
+    </form>
+</body>
+</html>

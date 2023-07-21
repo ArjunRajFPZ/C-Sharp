@@ -18,12 +18,22 @@ namespace CRUDWebApplication.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult TaskbookAdd()
         {
             return View();
         }
 
-        public IActionResult TaskbookAdd()
+        public IActionResult TaskbookView()
+        {
+            return View();
+        }
+
+        public IActionResult Signin()
+        {
+            return View();
+        }
+
+        public IActionResult Registration()
         {
             return View();
         }

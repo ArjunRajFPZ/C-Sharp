@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Form View";
+}
+
+<html>
+<head>
+    <style>
+        table{
+            width:100%;
+            border-width:2px;
+        }
+        input[type=text], [type=date], [type=number], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid;
+            border-radius: 4px;
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="">
+        <div>
+            <h1 align="center">View Task</h1><br />
+            <table>
+<tr>
+<th>Id</th>
+<th>Name</th>
+<th>Assigned From</th>
+<th>Assigned To</th>
+<th>Date</th>
+<th>Duration</th>
+<th>Status</th>
+<th></th>
+</tr>
+
+<tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>view</td>
+</tr>
+		</table>
+        </div>
+    </form>
+</body>
+</html>
