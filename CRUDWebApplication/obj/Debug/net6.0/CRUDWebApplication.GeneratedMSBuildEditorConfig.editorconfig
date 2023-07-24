@@ -24,16 +24,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/WORK/C-Sharp/CRUDWebApplication/Views/Home/Registration.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3RyYXRpb24uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [E:/WORK/C-Sharp/CRUDWebApplication/Views/Home/Signin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTaWduaW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/WORK/C-Sharp/CRUDWebApplication/Views/Home/TaskbookAdd.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUYXNrYm9va0FkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/WORK/C-Sharp/CRUDWebApplication/Views/Home/TaskbookView.cshtml]
@@ -46,6 +38,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/WORK/C-Sharp/CRUDWebApplication/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK/C-Sharp/CRUDWebApplication/Views/Taskbook/TaskbookAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza2Jvb2tcVGFza2Jvb2tBZGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK/C-Sharp/CRUDWebApplication/Views/User/UserAdd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/WORK/C-Sharp/CRUDWebApplication/Views/_ViewImports.cshtml]

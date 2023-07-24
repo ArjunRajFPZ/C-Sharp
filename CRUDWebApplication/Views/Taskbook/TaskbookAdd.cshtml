@@ -1,14 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Form";
+﻿@model CRUDWebApplication.Models.TaskbookAddModel
+@{
 }
-
 <html>
 <head>
     <style>
-        form{
+        form {
             display: flex;
             justify-content: center;
         }
+
         input[type=text], [type=date], [type=number], select {
             width: 100%;
             padding: 12px 20px;
@@ -28,26 +28,25 @@
     </style>
 </head>
 <body>
-    <form method="post" action="">
+    <form method="post" action="TaskbookAdd">
         <div style="width:40%">
+
             <h1 align="center">Add Task</h1>
+
             <lable>Task Name:</lable><br />
-            <input type="text" name="taskname" id="taskname" placeholder="task name" required /><br />
+            <input type="text" name="Name" id="Name" placeholder="task name" asp-for="Name" required /><br />
 
             <lable>Task Assined From:</lable><br />
-            <input type="text" name="taskassinedfrom" id="taskassinedfrom" placeholder="assigned from" required /><br />
+            <input type="text" name="Assignedfrom" id="Assignedfrom" placeholder="assigned from" asp-for="Assignedfrom" required /><br />
 
             <lable>Task Assined To:</lable><br />
-            <input type="text" name="taskassinedto" id="taskassinedto" placeholder="assigned to" required /><br />
+            <input type="text" name="Assignedto" id="Assignedto" placeholder="assigned to" asp-for="Assignedto" required /><br />
 
             <lable>Task Assined Date:</lable><br />
-            <input type="date" name="taskassineddate" id="taskassineddate" required /><br />
-
-            <lable>Task Duration:</lable><br />
-            <input type="number" name="taskduration" id="taskduration" placeholder="number of hours" required /><br />
+            <input type="date" name="Assigneddate" id="Assigneddate" asp-for="Assigneddate" required /><br />
 
             <label>Choose a Status:</label><br />
-            <select name="taskdtatus" id="taskdtatus" required>
+            <select name="Status" id="Status" asp-for="Status" required>
                 <option value="" disabled selected>select your option</option>
                 <option value="completed">Completed</option>
                 <option value="ongoing">On Going</option>

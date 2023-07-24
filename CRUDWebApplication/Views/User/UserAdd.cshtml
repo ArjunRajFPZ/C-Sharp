@@ -1,14 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Form";
+﻿@model CRUDWebApplication.Models.UserAddModel
+@{
 }
-
 <html>
 <head>
     <style>
-        form{
+        form {
             display: flex;
             justify-content: center;
         }
+
         input[type=text], [type=date], [type=tel], textarea {
             width: 100%;
             padding: 12px 20px;
@@ -16,6 +16,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         input[type=email], [type=password] {
             width: 100%;
             padding: 12px 20px;
@@ -35,30 +36,31 @@
     </style>
 </head>
 <body>
-    <form method="post" action="">
+    <form method="post" action="UserAdd">
         <div style="width:40%">
             <h1 align="center">Registration</h1>
-            <label>Enter Username:</label><br />
-            <input type="text" name="username" id="username" placeholder="username" required /><br />
 
-	        <label>Enter DOB:</label><br />
-            <input type="date" name="dob" id="dob" required /><br />
+            <label>Enter Username:</label><br />
+            <input type="text" name="Name" placeholder="Name" asp-for="Name" required /><br />
+
+            <label>Enter DOB:</label><br />
+            <input type="date" name="Dateofbirth" id="Dateofbirth" asp-for="Dateofbirth" required /><br />
 
             <label>Enter Phone:</label><br />
-            <input type="tel" name="phone" id="phone" placeholder="eg:- 0123456789" pattern="[0-9]{10}" required><br>
+            <input type="tel" name="Phone" id="Phone" placeholder="eg:- 0123456789" minlength="10" asp-for="Phone" required><br>
 
             <label>Enter Address:</label><br />
-            <textarea name="address" id="address" rows="4" cols="50"></textarea>
+            <textarea name="Address" id="Address" rows="4" cols="50" asp-for="Address" required></textarea>
 
             <label>Enter Email:</label><br />
-            <input type="email" name="email" id="email" placeholder="eg:- abc@gmail.com" required /><br />
+            <input type="email" name="Email" id="Email" placeholder="eg:- abc@gmail.com" asp-for="Email" required /><br />
 
             <label>Enter Password:</label><br />
-            <input type="password" name="password" id="password" required /><br />
+            <input type="password" name="Password" id="Password" minlength="8" asp-for="Password" required /><br />
 
             <label>Enter Confirm Password:</label><br />
-            <input type="password" name="confirmpassword" id="confirmpassword" required /><br />
-            
+            <input type="password" name="confirmpassword" id="confirmpassword" minlength="8" required /><br />
+
             <input type="submit" value="Submit" class="submit" />
         </div>
     </form>

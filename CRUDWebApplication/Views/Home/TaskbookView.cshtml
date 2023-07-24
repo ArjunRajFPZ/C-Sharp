@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Form View";
+    ViewData["Title"] = "TaskbookView";
 }
 
 <html>
@@ -7,23 +7,20 @@
     <style>
         table{
             width:100%;
-            border-width:2px;
         }
-        input[type=text], [type=date], [type=number], select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        input[type=button]{
+            margin-left:3px;
+            margin-top:3px;
         }
 
-        input[type=submit] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid;
-            border-radius: 4px;
-            background-color: #45a049;
+        td, th {
+            width:13%;
+            border: 1.5px solid #000000;
+            padding: 8px;
+        }
+
+        th{
+            background-color:#00bdf7;
         }
     </style>
 </head>
@@ -32,28 +29,29 @@
         <div>
             <h1 align="center">View Task</h1><br />
             <table>
-<tr>
-<th>Id</th>
-<th>Name</th>
-<th>Assigned From</th>
-<th>Assigned To</th>
-<th>Date</th>
-<th>Duration</th>
-<th>Status</th>
-<th></th>
-</tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Assigned From</th>
+                    <th>Assigned To</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
 
-<tr>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>view</td>
-</tr>
-		</table>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td><input type="button" class="btn btn-secondary" value="view"/>
+                        <input type="Button" class="btn btn-danger" value="Delete"/></td>
+                </tr>
+		    </table>
         </div>
     </form>
 </body>
