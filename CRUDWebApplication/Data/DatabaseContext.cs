@@ -8,7 +8,6 @@ namespace CRUDWebApplication.Data
         public DatabaseContext(DbContextOptions options) : base(options)
         {
         }
-
         public DbSet<TaskbookModel> TaskbookData { get; set; }
         public DbSet<UserModel> UserData { get; set; }
     }

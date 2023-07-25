@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace CRUDWebApplication.Models
+﻿namespace CRUDWebApplication.Models
 {
     public class UserModel
     {

@@ -1,0 +1,71 @@
+﻿@model CRUDWebApplication.Models.TaskbookEditModel
+
+
+<html>
+<head>
+    <style>
+        form {
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type=text], [type=date], [type=number], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid;
+            border-radius: 4px;
+            background-color: #45a049;
+        }
+
+        button[type=submit] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid;
+            border-radius: 4px;
+            background-color: #dc1c2f;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="TaskbookEdit">
+        <div style="width:40%">
+            <h1 align="center">Task Edit</h1>
+
+            <input type="hidden" name="Id" id="Name" asp-for="Id" />
+
+            <lable>Task Name:</lable><br />
+            <input type="text" name="Name" id="Name" placeholder="task name" asp-for="Name" required /><br />
+
+            <lable>Task Assined From:</lable><br />
+            <input type="text" name="Assignedfrom" id="Assignedfrom" placeholder="assigned from" asp-for="Assignedfrom" required /><br />
+
+            <lable>Task Assined To:</lable><br />
+            <input type="text" name="Assignedto" id="Assignedto" placeholder="assigned to" asp-for="Assignedto" required /><br />
+
+            <lable>Task Assined Date:</lable><br />
+            <input type="date" name="Assigneddate" id="Assigneddate" asp-for="Assigneddate" required /><br />
+
+            <label>Choose a Status:</label><br />
+            <select name="Status" id="Status" asp-for="Status" required>
+                <option value="" disabled selected>select your option</option>
+                <option value="completed">Completed</option>
+                <option value="ongoing">On Going</option>
+                <option value="fixing">Fixing</option>
+            </select><br />
+
+            <input type="submit" value="Update" class="submit" />
+            <button type="submit" value="Delete" class="delete" asp-controller="Taskbook" asp-action="TaskbookDelete">Delete</button>
+        </div>
+    </form>
+</body>
+</html>

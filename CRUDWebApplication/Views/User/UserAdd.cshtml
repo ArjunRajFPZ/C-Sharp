@@ -1,6 +1,5 @@
 ﻿@model CRUDWebApplication.Models.UserAddModel
-@{
-}
+
 <html>
 <head>
     <style>
@@ -57,9 +56,6 @@
 
             <label>Enter Password:</label><br />
             <input type="password" name="Password" id="Password" minlength="8" asp-for="Password" required /><br />
-
-            <label>Enter Confirm Password:</label><br />
-            <input type="password" name="confirmpassword" id="confirmpassword" minlength="8" required /><br />
 
             <input type="submit" value="Submit" class="submit" />
         </div>

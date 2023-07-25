@@ -1,0 +1,67 @@
+﻿@model List<CRUDWebApplication.Models.TaskbookModel>
+
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        td, th {
+            width: 13%;
+            border: 1.5px solid #000000;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #00bdf7;
+        }
+
+        input[type=button]{
+            background-color: #17a2b89e;
+            border-radius: 5px;
+            padding: 3px 13px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div>
+            <h1 align="center">Task View</h1><br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Assigned From</th>
+                        <th>Assigned To</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var taskbook in Model)
+                    {
+                        int count = 0;
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@taskbook.Name</td>
+                            <td>@taskbook.Assignedfrom</td>
+                            <td>@taskbook.Assignedto</td>
+                            <td>@taskbook.Assigneddate.ToString("dd/MM/yyyy")</td>
+                            <td>@taskbook.Status</td>
+                            <td>
+                                <a href="TaskbookEdit/@taskbook.Id">
+                                    <input type="button" value="Edit" />
+                                </a>
+                            </td>
+                        </tr>                           
+                    }                        
+                </tbody>
+            </table>
+        </div>
+    </form>
+</body>
+</html>

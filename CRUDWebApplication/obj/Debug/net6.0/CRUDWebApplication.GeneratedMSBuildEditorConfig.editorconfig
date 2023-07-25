@@ -44,8 +44,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza2Jvb2tcVGFza2Jvb2tBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/WORK/C-Sharp/CRUDWebApplication/Views/Taskbook/TaskbookEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza2Jvb2tcVGFza2Jvb2tFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK/C-Sharp/CRUDWebApplication/Views/Taskbook/TaskbookView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza2Jvb2tcVGFza2Jvb2tWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/WORK/C-Sharp/CRUDWebApplication/Views/User/UserAdd.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyQWRkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK/C-Sharp/CRUDWebApplication/Views/User/UserEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WORK/C-Sharp/CRUDWebApplication/Views/User/UserView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/WORK/C-Sharp/CRUDWebApplication/Views/_ViewImports.cshtml]
