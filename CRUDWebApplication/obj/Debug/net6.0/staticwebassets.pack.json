@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\CRUDWebApplication.bundle.scp.css"
     },
     {
+      "Id": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\TaskbookAddAndEdit.css",
+      "PackagePath": "staticwebassets\\css\\TaskbookAddAndEdit.css"
+    },
+    {
+      "Id": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\UserAddAndEdit.css",
+      "PackagePath": "staticwebassets\\css\\UserAddAndEdit.css"
+    },
+    {
       "Id": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -13,8 +21,16 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\js\\TaskbookAddAndEdit.js",
+      "PackagePath": "staticwebassets\\js\\TaskbookAddAndEdit.js"
+    },
+    {
       "Id": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\js\\userAddAndEditValidation.js",
+      "PackagePath": "staticwebassets\\js\\userAddAndEditValidation.js"
     },
     {
       "Id": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\lib\\bootstrap\\LICENSE",

@@ -2,71 +2,36 @@
 
 <html>
 <head>
-    <style>
-        form {
-            display: flex;
-            justify-content: center;
-        }
-
-        input[type=text], [type=date], [type=tel], textarea {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type=email], [type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type=submit] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid;
-            border-radius: 4px;
-            background-color: #45a049;
-        }
-
-        button[type=submit] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid;
-            border-radius: 4px;
-            background-color: #dc1c2f;
-        }
-    </style>
+    <a href="~/lib/jquery/dist/jquery.min.map"></a>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/useraddandeditvalidation.js"></script>
+    <link href="~/css/useraddandedit.css" rel="stylesheet" />
 </head>
 <body>
-    <form method="post" action="UserEdit">
+    <form id="userform" method="post" action="UserEdit">
         <div style="width:40%">
             <h1 align="center">User Edit</h1>
 
             <input type="hidden" name="Id" asp-for="Id" />
 
             <label>Enter Username:</label><br />
-            <input type="text" name="Name" placeholder="Name" asp-for="Name" required /><br />
+            <input type="text" name="name" id="name" placeholder="Name" asp-for="Name" required /><br />
 
             <label>Enter DOB:</label><br />
-            <input type="date" name="Dateofbirth" id="Dateofbirth" asp-for="Dateofbirth" required /><br />
+            <input type="date" name="dateofbirth" id="dateofbirth" asp-for="Dateofbirth" required /><br />
 
             <label>Enter Phone:</label><br />
-            <input type="tel" name="Phone" id="Phone" placeholder="eg:- 0123456789" minlength="10" asp-for="Phone" required><br>
+            <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" maxlength="12" placeholder="eg:- 0123456789" asp-for="Phone" required><br>
 
             <label>Enter Address:</label><br />
-            <textarea name="Address" id="Address" rows="4" cols="50" asp-for="Address" required></textarea>
+            <textarea name="address" id="address" rows="4" cols="50" asp-for="Address" required></textarea>
 
             <label>Enter Email:</label><br />
-            <input type="email" name="Email" id="Email" placeholder="eg:- abc@gmail.com" asp-for="Email" required /><br />
+            <input type="email" name="email" id="email" placeholder="eg:- abc@gmail.com" asp-for="Email" required /><br />
 
             <label>Enter Password:</label><br />
-            <input type="Text" name="Password" id="Password" minlength="8" asp-for="Password" required /><br />
+            <input type="text" name="password" id="password" minlength="8" asp-for="Password" required /><br />
 
             <input type="submit" value="Update" class="submit" />
             <button type="submit" value="Delete" class="delete" asp-controller="User" asp-action="UserDelete">Delete</button>

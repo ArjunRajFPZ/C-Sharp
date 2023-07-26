@@ -2,50 +2,32 @@
 
 <html>
 <head>
-    <style>
-        form {
-            display: flex;
-            justify-content: center;
-        }
-
-        input[type=text], [type=date], [type=number], select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type=submit] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: 1px solid;
-            border-radius: 4px;
-            background-color: #45a049;
-        }
-    </style>
+    <a href="~/lib/jquery/dist/jquery.min.map"></a>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/taskbookaddandedit.js"></script>
+    <link href="~/css/taskbookaddandedit.css" rel="stylesheet" />
 </head>
 <body>
-    <form method="post" action="TaskbookAdd">
+    <form id="taskbookform" method="post" action="TaskbookAdd">
         <div style="width:40%">
 
             <h1 align="center">Task Add</h1>
 
             <lable>Task Name:</lable><br />
-            <input type="text" name="Name" id="Name" placeholder="task name" asp-for="Name" required /><br />
+            <input type="text" name="name" id="name" placeholder="task name" asp-for="Name" required /><br />
 
             <lable>Task Assined From:</lable><br />
-            <input type="text" name="Assignedfrom" id="Assignedfrom" placeholder="assigned from" asp-for="Assignedfrom" required /><br />
+            <input type="text" name="assignedfrom" id="assignedfrom" placeholder="assigned from" asp-for="Assignedfrom" required /><br />
 
             <lable>Task Assined To:</lable><br />
-            <input type="text" name="Assignedto" id="Assignedto" placeholder="assigned to" asp-for="Assignedto" required /><br />
+            <input type="text" name="assignedto" id="assignedto" placeholder="assigned to" asp-for="Assignedto" required /><br />
 
             <lable>Task Assined Date:</lable><br />
-            <input type="date" name="Assigneddate" id="Assigneddate" asp-for="Assigneddate" required /><br />
+            <input type="date" name="assigneddate" id="assigneddate" asp-for="Assigneddate" required /><br />
 
             <label>Choose a Status:</label><br />
-            <select name="Status" id="Status" asp-for="Status" required>
+            <select name="status" id="status" asp-for="Status" required>
                 <option value="" disabled selected>select your option</option>
                 <option value="completed">Completed</option>
                 <option value="ongoing">On Going</option>
