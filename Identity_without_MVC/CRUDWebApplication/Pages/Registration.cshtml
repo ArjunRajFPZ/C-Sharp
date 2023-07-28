@@ -1,0 +1,37 @@
+﻿@page
+@model CRUDWebApplication.Pages.RegistrationModel
+@{
+}
+<html>
+<head>
+    <link href="~/css/useraddandedit.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="registerForm" method="post">
+        <div style="width:40%">
+            <h1 align="center">Create a new account</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div>
+                <label asp-for="Register.Email">Enter Email:</label>
+                <input asp-for="Register.Email" class="form-control" placeholder="eg:-abc@gmail.com" />
+                <span asp-validation-for="Register.Email" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Register.Password">Enter Password:</label>
+                <input asp-for="Register.Password" class="form-control" />
+                <span asp-validation-for="Register.Password" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Register.ConfirmPassword">Enter Confirm Password:</label>
+                <input asp-for="Register.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Register.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <input type="submit" id="registerSubmit" value="Register" />
+        </div>
+    </form>
+</body>
+</html>

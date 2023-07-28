@@ -1,0 +1,40 @@
+﻿@page
+@model CRUDWebApplication.Pages.LoginModel
+@{
+}
+<html>
+<head>
+    <link href="~/css/useraddandedit.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="loginform" method="post">
+        <div style="width:40%">
+            <h1 align="center">Login</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div>
+                <label asp-for="login.Email">Enter Email:</label>
+                <input asp-for="login.Email" class="form-control" placeholder="eg:-abc@gmail.com" />
+                <span asp-validation-for="login.Email" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="login.Password">Enter Password:</label>
+                <input asp-for="login.Password" class="form-control" />
+                <span asp-validation-for="login.Password" class="text-danger"></span>
+            </div>
+
+            <div>
+                <input type="checkbox" asp-for="login.RememberMe" />
+                <label asp-for="login.RememberMe">Remember Me</label>
+                <span asp-validation-for="login.RememberMe" class="text-danger"></span>
+            </div>
+            <div>
+                <a href="Registration">Create an Account?</a>
+            </div>
+
+            <input type="submit" id="registerSubmit" value="Register" />
+        </div>
+    </form>
+</body>
+</html>

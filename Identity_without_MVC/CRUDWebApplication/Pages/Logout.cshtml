@@ -1,0 +1,35 @@
+﻿@page
+@model CRUDWebApplication.Pages.LogoutModel
+@{
+}
+
+<html>
+<head>
+    <style>
+        form {
+            margin-top:100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .block {
+            width: 49%;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="registerForm" method="post">
+        <div style="width:40%">
+
+            <h1 align="center">Are you sure you want to logout?</h1>
+            <button class="btn btn-primary block" asp-page-handler="Logout"> Yes </button>
+            <button class="btn btn-secondary block" asp-page-handler="DontLogout"> No </button>
+        </div>
+    </form>
+</body>
+</html>
