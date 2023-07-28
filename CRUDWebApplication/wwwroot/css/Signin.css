@@ -1,0 +1,21 @@
+﻿form {
+    display: flex;
+    justify-content: center;
+}
+
+input[type=email], [type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type=submit] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: #45a049;
+}

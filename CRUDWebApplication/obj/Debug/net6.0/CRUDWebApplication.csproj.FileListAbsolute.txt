@@ -352,3 +352,11 @@ E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\runtimes\unix\lib\net6.0\Sys
 E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+E:\WORK\C-Sharp\CRUDWebApplication\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+E:\WORK\C-Sharp\CRUDWebApplication\obj\Debug\net6.0\CRUDWebApplication.MvcApplicationPartsAssemblyInfo.cs
