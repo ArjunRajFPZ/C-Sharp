@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FzpjOun81nCHeEqQDCiRYkxbRMvDLVqnga2qg4kMQlk=",
+  "Hash": "GDg5mpcpu1Ed+mE98nwSQNcsGMm46nhQPoqsJoAHDNc=",
   "Source": "CRUDWebApplication",
   "BasePath": "_content/CRUDWebApplication",
   "Mode": "Default",
@@ -1071,12 +1071,12 @@
       "OriginalItemSpec": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\CRUDWebApplication.bundle.scp.css"
     },
     {
-      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\Signin.css",
+      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\custom.css",
       "SourceId": "CRUDWebApplication",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\",
       "BasePath": "_content/CRUDWebApplication",
-      "RelativePath": "css/Signin.css",
+      "RelativePath": "css/custom.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1085,7 +1085,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Signin.css"
+      "OriginalItemSpec": "wwwroot\\css\\custom.css"
     },
     {
       "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\site.css",
@@ -1105,12 +1105,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\TaskbookAddAndEdit.css",
+      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\taskbook.css",
       "SourceId": "CRUDWebApplication",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\",
       "BasePath": "_content/CRUDWebApplication",
-      "RelativePath": "css/TaskbookAddAndEdit.css",
+      "RelativePath": "css/taskbook.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1119,24 +1119,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\TaskbookAddAndEdit.css"
-    },
-    {
-      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\css\\UserAddAndEdit.css",
-      "SourceId": "CRUDWebApplication",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\",
-      "BasePath": "_content/CRUDWebApplication",
-      "RelativePath": "css/UserAddAndEdit.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\UserAddAndEdit.css"
+      "OriginalItemSpec": "wwwroot\\css\\taskbook.css"
     },
     {
       "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\favicon.ico",
@@ -1173,12 +1156,12 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\js\\TaskbookAddAndEdit.js",
+      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\js\\taskvalidation.js",
       "SourceId": "CRUDWebApplication",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\",
       "BasePath": "_content/CRUDWebApplication",
-      "RelativePath": "js/TaskbookAddAndEdit.js",
+      "RelativePath": "js/taskvalidation.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1187,24 +1170,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\TaskbookAddAndEdit.js"
-    },
-    {
-      "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\js\\userAddAndEditValidation.js",
-      "SourceId": "CRUDWebApplication",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\",
-      "BasePath": "_content/CRUDWebApplication",
-      "RelativePath": "js/userAddAndEditValidation.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\userAddAndEditValidation.js"
+      "OriginalItemSpec": "wwwroot\\js\\taskvalidation.js"
     },
     {
       "Identity": "E:\\WORK\\C-Sharp\\CRUDWebApplication\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

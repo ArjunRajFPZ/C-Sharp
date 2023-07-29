@@ -4,27 +4,7 @@
 }
 <html>
 <head>
-    <style>
-        table {
-            width: 100%;
-        }
-
-        td, th {
-            width: 13%;
-            border: 1.5px solid #000000;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #00bdf7;
-        }
-
-        input[type=button]{
-            background-color: #17a2b89e;
-            border-radius: 5px;
-            padding: 3px 13px;
-        }
-    </style>
+    <link href="~/css/taskbook.css" rel="stylesheet" />
 </head>
 <body>
     <form>
@@ -43,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var taskbook in Model)
+                    @foreach (var taskbook in Model)
                     {
                         count++;
                         <tr>
@@ -55,11 +35,11 @@
                             <td>@taskbook.Status</td>
                             <td>
                                 <a href="TaskbookEdit/@taskbook.Id">
-                                    <input type="button" value="Edit" />
+                                    <button type="button" class="btn btn-primary">Edit</button>
                                 </a>
                             </td>
-                        </tr>                           
-                    }                        
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

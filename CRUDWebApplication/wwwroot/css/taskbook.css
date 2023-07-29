@@ -1,15 +1,16 @@
-﻿form {
+﻿#taskbookform {
     display: flex;
     justify-content: center;
 }
 
-input[type=text], [type=date], [type=tel], [type=number], [type=email], [type=password], textarea {
+input[type=text], [type=date], [type=number], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 input[type=submit] {
     width: 100%;
     padding: 12px 20px;
@@ -19,10 +20,25 @@ input[type=submit] {
     background-color: #45a049;
 }
 
-button[type=submit] {
+.delete-task {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid;
     border-radius: 4px;
     background-color: #dc1c2f;
+}
+
+table {
+    width: 100%;
+}
+
+td, th {
+    width: 13%;
+    border: 1.5px solid #000000;
+    padding: 8px;
+}
+
+th {
+    background-color: #00bdf7;
+}

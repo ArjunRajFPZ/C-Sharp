@@ -1,18 +1,19 @@
 ﻿@model CRUDWebApplication.Models.TaskbookAddModel
-
+@{
+}
 <html>
 <head>
     <a href="~/lib/jquery/dist/jquery.min.map"></a>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/js/taskbookaddandedit.js"></script>
-    <link href="~/css/taskbookaddandedit.css" rel="stylesheet" />
+    <script src="~/js/taskvalidation.js"></script>
+    <link href="~/css/custom.css" rel="stylesheet" />
 </head>
 <body>
     <form id="taskbookform" method="post" action="TaskbookAdd">
-        <div style="width:40%">
+        <div class="form-design">
 
-            <h1 align="center">Task Add</h1>
+            <h1 class="add-heading">Task Add</h1>
 
             <lable>Task Name:</lable><br />
             <input type="text" name="name" id="name" placeholder="task name" asp-for="Name" required /><br />
@@ -34,7 +35,10 @@
                 <option value="fixing">Fixing</option>
             </select><br />
 
-            <input type="submit" value="Submit" class="submit" />
+            <lable>Task Email:</lable><br />
+            <input type="email" name="email" id="email" asp-for="Email" required /><br />
+
+            <input type="submit" value="Submit" class="task-submit" />
         </div>
     </form>
 </body>

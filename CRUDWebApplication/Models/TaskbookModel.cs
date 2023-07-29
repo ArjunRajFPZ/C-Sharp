@@ -8,6 +8,6 @@
         public string Assignedto { get; set; }
         public DateTime Assigneddate { get; set; }
         public string Status { get; set; }
-
+        public string Email { get; set; }
     }
 }

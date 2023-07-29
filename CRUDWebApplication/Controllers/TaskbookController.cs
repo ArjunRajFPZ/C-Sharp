@@ -13,6 +13,7 @@ namespace CRUDWebApplication.Controllers
         {
             databaseContext = _databaseContext;
         }
+
         [HttpGet]
         public IActionResult TaskbookAdd()
         {
@@ -37,11 +38,12 @@ namespace CRUDWebApplication.Controllers
                 Assignedfrom = TaskAdd.Assignedfrom,
                 Assignedto = TaskAdd.Assignedto,
                 Assigneddate = TaskAdd.Assigneddate,
-                Status = TaskAdd.Status
+                Status = TaskAdd.Status,
+                Email = TaskAdd.Email
             };
             await databaseContext.TaskbookData.AddAsync(taskbook);
             await databaseContext.SaveChangesAsync();
-            return RedirectToAction("TaskbookView");
+            return RedirectToAction("TaskbookAdd");
             #endregion
         }
         [HttpGet]
@@ -58,7 +60,8 @@ namespace CRUDWebApplication.Controllers
                     Assignedfrom = taskbook.Assignedfrom,
                     Assignedto = taskbook.Assignedto,
                     Assigneddate = taskbook.Assigneddate,
-                    Status = taskbook.Status
+                    Status = taskbook.Status,
+                    Email = taskbook.Email
                 };
                 return View(taskbookEdit);
             }

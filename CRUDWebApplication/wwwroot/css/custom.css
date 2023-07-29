@@ -1,0 +1,54 @@
+﻿form {
+    display: flex;
+    justify-content: center;
+}
+.form-design {
+    width: 40%
+}
+
+.form-heading {
+    display: flex;
+    justify-content: center;
+    margin-top:100px;
+    margin-bottom:10px;
+}
+
+.add-heading {
+    display: flex;
+    justify-content: center;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+input[type=text], [type=date], [type=tel], [type=number], [type=email], [type=password], textarea ,select{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type=submit] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: #45a049;
+}
+
+.login-submit {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: #45a049;
+}
+.task-submit{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: #45a049;
+}

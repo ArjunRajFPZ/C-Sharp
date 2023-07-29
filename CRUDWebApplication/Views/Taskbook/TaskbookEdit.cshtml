@@ -5,8 +5,8 @@
     <a href="~/lib/jquery/dist/jquery.min.map"></a>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/js/taskbookaddandedit.js"></script>
-    <link href="~/css/taskbookaddandedit.css" rel="stylesheet" />
+    <script src="~/js/taskvalidation.js"></script>
+    <link href="~/css/taskbook.css" rel="stylesheet" />
 </head>
 <body>
     <form id="taskbookform" method="post" action="TaskbookEdit">
@@ -36,7 +36,7 @@
             </select><br />
 
             <input type="submit" value="Update" class="submit" />
-            <button type="submit" value="Delete" class="delete" asp-controller="Taskbook" asp-action="TaskbookDelete">Delete</button>
+            <button type="submit" value="Delete" class="delete-task" asp-controller="Taskbook" asp-action="TaskbookDelete">Delete</button>
         </div>
     </form>
 </body>

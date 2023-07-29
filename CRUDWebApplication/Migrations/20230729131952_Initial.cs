@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CRUDWebApplication.Migrations
 {
-    /// <inheritdoc />
-    public partial class InitialMigrtion : Migration
+    public partial class Initial : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -59,28 +57,12 @@ namespace CRUDWebApplication.Migrations
                     Assignedfrom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Assignedto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Assigneddate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TaskbookData", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserData",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Dateofbirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserData", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,7 +211,6 @@ namespace CRUDWebApplication.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -249,9 +230,6 @@ namespace CRUDWebApplication.Migrations
 
             migrationBuilder.DropTable(
                 name: "TaskbookData");
-
-            migrationBuilder.DropTable(
-                name: "UserData");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

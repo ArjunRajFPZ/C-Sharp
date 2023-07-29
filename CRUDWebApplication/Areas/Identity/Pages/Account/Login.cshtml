@@ -7,42 +7,37 @@
 
 <html>
 <head>
-    <link href="~/css/signin.css" rel="stylesheet" />
+    <link href="~/css/custom.css" rel="stylesheet" />
 </head>
 <body>
     <form id="account" method="post">
-        <div style="width:40%">
-            <h1 align="center">Login</h1>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-design">
+            <h1 class="form-heading">Login</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <div>
-                <label asp-for="Input.Email" class="form-label">Enter Email:</label><br />
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Email">Enter Email:</label>
+                <input asp-for="Input.Email" class="form-control" placeholder="eg:-abc@gmail.com" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
             <div>
-                <label asp-for="Input.Password" class="form-label">Enter Password:</label><br />
-                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                <label asp-for="Input.Password">Enter Password:</label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
 
             <div>
                 <div class="checkbox">
-                    <label asp-for="Input.RememberMe" class="form-label">
+                    <label asp-for="Input.RememberMe">
                         <input class="form-check-input" asp-for="Input.RememberMe" />
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
                 </div>
             </div>
 
-            <div>
-                <input type="submit" id="login-submit" value="Log in" />
-            </div>
-
-            <p>
-                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-            </p>
+             <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user?</a>
+            <button type="submit" class="login-submit" id="login-submit">Log in</button>
         </div>
     </form>
 </body>

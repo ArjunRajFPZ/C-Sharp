@@ -3,28 +3,15 @@
 @{
     ViewData["Title"] = "Register";
 }
-
 <html>
 <head>
-    <link href="~/css/useraddandedit.css" rel="stylesheet" />
+    <link href="~/css/custom.css" rel="stylesheet" />
 </head>
 <body>
     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <div style="width:40%">
-            <h1 align="center">Create a new account</h1>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div>
-                <label asp-for="Input.Name">Enter Username:</label>
-                <input asp-for="Input.Name" class="form-control" placeholder="Name" autocomplete="username" aria-required="true" />
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
-            </div>
-
-            <div>
-                <label asp-for="Input.Phone">Enter Phone Number:</label>
-                <input type="number" asp-for="Input.Phone" class="form-control" placeholder="eg:-1234567890" autocomplete="username" aria-required="true" />
-                <span asp-validation-for="Input.Phone" class="text-danger"></span>
-            </div>
+        <div class="form-design">
+            <h1 class="form-heading">Create a new account</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <div>
                 <label asp-for="Input.Email">Enter Email:</label>
@@ -49,6 +36,7 @@
     </form>
 </body>
 </html>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
