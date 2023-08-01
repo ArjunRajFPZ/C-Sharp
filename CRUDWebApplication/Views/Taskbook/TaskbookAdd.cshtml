@@ -1,5 +1,12 @@
-﻿@model CRUDWebApplication.Models.TaskbookAddModel
+﻿@using Microsoft.AspNetCore.Identity
+@using CRUDWebApplication.Areas.Identity.Data
+
+@model CRUDWebApplication.Models.TaskbookAddModel
+@inject SignInManager<DatabaseRegistrationModel> SignInManager
+@inject UserManager<DatabaseRegistrationModel> UserManager
 @{
+    var usr = await UserManager.GetUserAsync(User);
+    var email = usr?.Email;
 }
 <html>
 <head>
@@ -35,9 +42,7 @@
                 <option value="fixing">Fixing</option>
             </select><br />
 
-            <lable>Task Email:</lable><br />
-            <input type="email" name="email" id="email" asp-for="Email" required /><br />
-
+            <input type="hidden" name="email" asp-for="@email" /><br />
             <input type="submit" value="Submit" class="task-submit" />
         </div>
     </form>

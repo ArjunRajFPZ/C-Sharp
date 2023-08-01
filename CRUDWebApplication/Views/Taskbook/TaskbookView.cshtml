@@ -34,9 +34,8 @@
                             <td>@taskbook.Assigneddate.ToString("dd/MM/yyyy")</td>
                             <td>@taskbook.Status</td>
                             <td>
-                                <a href="TaskbookEdit/@taskbook.Id">
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                </a>
+                                <button type="submit" class="btn btn-primary" asp-controller="Taskbook" asp-action="TaskbookEdit" asp-route-Id="@taskbook.Id">Edit</button>
+                                <button type="submit" class="btn btn-danger" asp-controller="Taskbook" asp-action="TaskbookDelete">Delete</button>
                             </td>
                         </tr>
                     }

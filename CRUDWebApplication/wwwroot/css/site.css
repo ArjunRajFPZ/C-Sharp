@@ -16,3 +16,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.main-heading {
+    font-family: serif;
+    margin-left: 100px;
+    margin-right: 20px;
+    font-size: 23px;
+    background: #121FCF;
+    background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

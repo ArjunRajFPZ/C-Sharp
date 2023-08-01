@@ -20,15 +20,6 @@ input[type=submit] {
     background-color: #45a049;
 }
 
-.delete-task {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid;
-    border-radius: 4px;
-    background-color: #dc1c2f;
-}
-
 table {
     width: 100%;
 }
@@ -40,5 +31,6 @@ td, th {
 }
 
 th {
+    font-family: serif;
     background-color: #00bdf7;
 }

@@ -2,6 +2,7 @@
 using CRUDWebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CRUDWebApplication.Controllers
 {
@@ -23,7 +24,8 @@ namespace CRUDWebApplication.Controllers
         public async Task<IActionResult> TaskbookView()
         {
             #region Taskbook View
-            var taskbooks = await databaseContext.TaskbookData.ToListAsync();
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            List<TaskbookModel> taskbooks = await databaseContext.TaskbookData.Where(x => x.Email == userEmail).ToListAsync();
             return View(taskbooks);
             #endregion
         }
@@ -43,7 +45,7 @@ namespace CRUDWebApplication.Controllers
             };
             await databaseContext.TaskbookData.AddAsync(taskbook);
             await databaseContext.SaveChangesAsync();
-            return RedirectToAction("TaskbookAdd");
+            return RedirectToAction("TaskbookView");
             #endregion
         }
         [HttpGet]
