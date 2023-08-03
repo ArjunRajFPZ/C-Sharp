@@ -1,0 +1,43 @@
+﻿@model CRUDWebApplication.Models.SPTaskbookModel
+
+<html>
+<head>
+    <a href="~/lib/jquery/dist/jquery.min.map"></a>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/taskvalidation.js"></script>
+    <link href="~/css/taskbook.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="taskbookform" method="post" action="TaskbookEdit">
+        <div style="width:40%">
+            <h1 align="center">Task Edit</h1>
+
+            <input type="hidden" name="Id" asp-for="Id" />
+
+            <lable>Task Name:</lable><br />
+            <input type="text" name="name" id="name" placeholder="task name" asp-for="Name" required /><br />
+
+            <lable>Task Assined From:</lable><br />
+            <input type="text" name="assignedfrom" id="assignedfrom" placeholder="assigned from" asp-for="Assignedfrom" required /><br />
+
+            <lable>Task Assined To:</lable><br />
+            <input type="text" name="assignedto" id="assignedto" placeholder="assigned to" asp-for="Assignedto" required /><br />
+
+            <lable>Task Assined Date:</lable><br />
+            <input type="date" name="assigneddate" id="assigneddate" asp-for="Assigneddate" required /><br />
+
+            <label>Choose a Status:</label><br />
+            <select name="status" id="status" asp-for="Status" required>
+                <option value="" disabled selected>select your option</option>
+                <option value="completed">Completed</option>
+                <option value="ongoing">On Going</option>
+                <option value="fixing">Fixing</option>
+            </select><br />
+
+            <input type="hidden" name="Email" asp-for="Email" />
+            <input type="submit" value="Update" class="submit" />
+        </div>
+    </form>
+</body>
+</html>

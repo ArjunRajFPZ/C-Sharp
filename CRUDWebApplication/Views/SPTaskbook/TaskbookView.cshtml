@@ -1,4 +1,5 @@
-﻿@model List<CRUDWebApplication.Models.TaskbookModel>
+﻿@model IEnumerable<CRUDWebApplication.Models.SPTaskbookModel>
+
 @{
     var addSuccessMessage = TempData["addSuccessMessage"]?.ToString();
     var updateErrorMessage = TempData["updateErrorMessage"]?.ToString();
@@ -7,6 +8,7 @@
     var deleteSuccessMessage = TempData["deleteSuccessMessage"]?.ToString();
     int count = 0;
 }
+
 <html>
 <head>
     <link href="~/css/taskbook.css" rel="stylesheet" />
@@ -49,7 +51,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             }
-            <h1 align="center">Task View</h1><br />
+            <h1 align="center">SPTask View</h1><br />
             <table>
                 <thead>
                     <tr>
@@ -76,8 +78,8 @@
                                 <td>@taskbook.Assigneddate.ToString("dd/MM/yyyy")</td>
                                 <td>@taskbook.Status</td>
                                 <td>
-                                    <button type="submit" class="btn btn-primary" asp-controller="Taskbook" asp-action="TaskbookEdit" asp-route-Id="@taskbook.Id">Edit</button>
-                                    <button type="submit" class="btn btn-danger" asp-controller="Taskbook" asp-action="TaskbookDelete">Delete</button>
+                                    <button type="submit" class="btn btn-primary" asp-controller="SPTaskbook" asp-action="TaskbookEdit" asp-route-Id="@taskbook.Id">Edit</button>
+                                    <button type="submit" class="btn btn-danger" asp-controller="SPTaskbook" asp-action="TaskbookDelete" asp-route-Id="@taskbook.Id">Delete</button>
                                 </td>
                             </tr>
                         }

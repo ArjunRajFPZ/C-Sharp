@@ -7,8 +7,7 @@
 }
 
 .form-heading {
-    display: flex;
-    font-family: serif;
+    display: flex
     justify-content: center;
     margin-top: 100px;
     margin-bottom: 10px;
@@ -16,7 +15,6 @@
 
 .add-heading {
     display: flex;
-    font-family: serif;
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 10px;

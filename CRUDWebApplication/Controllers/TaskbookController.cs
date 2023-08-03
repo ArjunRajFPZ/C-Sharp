@@ -45,6 +45,7 @@ namespace CRUDWebApplication.Controllers
             };
             await databaseContext.TaskbookData.AddAsync(taskbook);
             await databaseContext.SaveChangesAsync();
+            TempData["addSuccessMessage"] = "Task Added To Taskbook Successfully.";
             return RedirectToAction("TaskbookView");
             #endregion
         }
@@ -84,8 +85,10 @@ namespace CRUDWebApplication.Controllers
                 taskbook.Status = taskbookEdit.Status;
 
                 await databaseContext.SaveChangesAsync();
+                TempData["updateSuccessMessage"] = "Task Updated To Taskbook Successfully.";
                 return RedirectToAction("TaskbookView");
             }
+            TempData["updateErrorMessage"] = "Task Updation To Taskbook Failed!";
             return View("TaskbookView");
             #endregion
         }
@@ -98,9 +101,10 @@ namespace CRUDWebApplication.Controllers
             {
                 databaseContext.TaskbookData.Remove(taskbook);
                 await databaseContext.SaveChangesAsync();
-
+                TempData["deleteSuccessMessage"] = "Task Deleted From Taskbook Successfully.";
                 return RedirectToAction("TaskbookView");
             }
+            TempData["deleteErrorMessage"] = "Task Deletion From Taskbook Failed!";
             return View("TaskbookView");
             #endregion
         }
