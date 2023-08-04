@@ -15,7 +15,7 @@
 
             <div>
                 <label asp-for="Input.Email">Enter Email:</label>
-                <input asp-for="Input.Email" class="form-control" placeholder="eg:-abc@gmail.com" autocomplete="username" aria-required="true" />
+                <input type="email" asp-for="Input.Email" class="form-control" placeholder="eg:-abc@gmail.com" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
