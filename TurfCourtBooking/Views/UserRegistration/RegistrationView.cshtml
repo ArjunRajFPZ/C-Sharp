@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TurfCourtBooking.Models.RegistrationModel>
+
+@{
+    int count = 0;
+}
+<html>
+<head>
+    <link href="~/Content/registration.css" rel="stylesheet" />
+</head>
+<body>
+    <form>
+        <div>
+            <h1 align="center">Task View</h1><br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Dateofbirth</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Usertype</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var userList in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@userList.Name</td>
+                                <td>@userList.Dateofbirth.ToString("dd/MM/yyyy")</td>
+                                <td>@userList.Phone</td>
+                                <td>@userList.Address</td>
+                                <td>@userList.Email</td>
+                                <td>@userList.Password</td>
+                                <td>@userList.Usertype</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">
+                                <div>
+                                    No data found!
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+

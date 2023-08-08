@@ -1,0 +1,58 @@
+﻿@model TurfCourtBooking.Models.RegistrationModel
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="registerForm" method="post" action="RegistrationAdd">
+        <div class="form-design">
+            <h1 class="form-heading">Create a new account</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div>
+                <label>Enter Name:</label>
+                <input type="text" class="form-control" id="Name" name="Name" placeholder="Name" asp-for="Name" required />
+            </div>
+
+            <div>
+                <label>Enter Date of Birth:</label>
+                <input type="date" class="form-control" id="Dateofbirth" name="Dateofbirth" asp-for="Dateofbirth" required />
+            </div>
+
+            <div>
+                <label>Enter Phone Number:</label>
+                <input type="tel" class="form-control" id="Phone" name="Phone" pattern="[0-9]{10}" placeholder="0123456789" asp-for="Phone" required />
+            </div>
+
+            <div>
+                <label>Enter Address:</label>
+                <textarea rows="4" cols="50" id="Address" name="Address" asp-for="Address" required></textarea>
+            </div>
+
+            <div>
+                <label>Enter Email:</label>
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="eg:-abc@xyz.com" asp-for="Email" required />
+            </div>
+
+
+            <div>
+                <label>Enter Password:</label>
+                <input type="password" class="form-control" id="Password" name="Password" asp-for="Password" required />
+            </div>
+
+            <div>
+                <label>Enter Confirm Password:</label>
+                <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required />
+            </div>
+
+            <input type="submit" id="registerSubmit" value="Register" />
+        </div>
+    </form>
+</body>
+</html>

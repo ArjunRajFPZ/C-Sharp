@@ -1,0 +1,42 @@
+﻿
+@{
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<html>
+<head>
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="account" method="post" action="Login">
+        <div class="form-design">
+            @if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                <div class="alert alert-danger alert-dismissible fade show" style="margin-top: 20px" role="alert">
+                    <strong>@errorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 class="form-heading">Login</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div>
+                <label>Enter Email:</label>
+                <input type="email" class="form-control" placeholder="eg:-abc@gmail.com" id="email" name="email" asp-for="Email" required />
+            </div>
+
+            <div>
+                <label>Enter Password:</label>
+                <input type="password" class="form-control" id="password" name="password" asp-for="Password" required />
+            </div>
+
+            <a href="~/UserRegistration/RegistrationAdd">Register as a new user?</a>
+            <button type="submit" class="login-submit" id="login-submit">Log in</button>
+        </div>
+    </form>
+</body>
+</html>

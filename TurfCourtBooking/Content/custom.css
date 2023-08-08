@@ -1,0 +1,61 @@
+﻿form {
+    display: flex;
+    justify-content: center;
+}
+.form-design {
+    width: 45%
+}
+
+.form-heading {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.adds-heading {
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input[type=text], [type=date], [type=tel], [type=number], [type=email], [type=password], textarea ,select{
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type=submit] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    margin-bottom: 50px;
+    border: 1px solid;
+    border-radius: 4px;
+    background: #000000;
+    background: linear-gradient(117.5deg, rgb(89, 233, 162) 20.5%, rgb(29, 209, 185) 100.2%);
+}
+
+.login-submit {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid;
+    border-radius: 4px;
+    background: #000000;
+    background: linear-gradient(117.5deg, rgb(89, 233, 162) 20.5%, rgb(29, 209, 185) 100.2%);
+}
+.task-submit {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid;
+    border-radius: 4px;
+    background: #000000;
+    background: linear-gradient(117.5deg, rgb(89, 233, 162) 20.5%, rgb(29, 209, 185) 100.2%);
+}
+
