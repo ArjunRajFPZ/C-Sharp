@@ -1,0 +1,28 @@
+﻿#registerForm {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+}
+
+td, th {
+    width: 13%;
+    border: 1.5px solid #000000;
+    padding: 8px;
+}
+
+th {
+    font-family: serif;
+    background-color: #00ffb1cc;
+}
+
+.main-heading {
+    font-size: 25px;
+    font-family: serif;
+    margin-right: 20px;
+    background: #000000;
+    background: linear-gradient(to right, #000000, #434343);
+    -webkit-text-fill-color: transparent;
+}

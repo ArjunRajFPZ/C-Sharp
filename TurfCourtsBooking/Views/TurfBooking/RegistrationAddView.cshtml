@@ -1,0 +1,132 @@
+﻿@model TurfCourtsBooking.MultiViewModel.TurfViewAndAddUserDetails
+
+@{
+    var registrationErrorMessage = TempData["registrationErrorMessage"]?.ToString();
+    var userDate = Convert.ToDateTime(TempData["userDate"]).Date.ToString("dd-MM-yyyy");
+    var Turftype = TempData["Turftype"]?.ToString();
+    List<string> checkStartTime = new List<string>();
+    List<string> checkEndTime = new List<string>();
+    foreach (var checklist in Model.turfBookingModel)
+    {
+        checkStartTime.Add(checklist.Starttime);
+        checkEndTime.Add(checklist.Endtime);
+    }
+}
+
+<html>
+<head>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">        
+        function checkTime() {
+            var checkStartTimeFrom = document.getElementById("Starttime").value;
+            var checkEndTimeTo = document.getElementById("Endtime").value;
+            var convertstarttime = '@Html.Raw(Json.Encode(checkStartTime))';
+            var convertendtime = '@Html.Raw(Json.Encode(checkEndTime))';
+            var DbStartTime = JSON.parse(convertstarttime);
+            var DbEndTime = JSON.parse(convertendtime);            
+
+            if (!checkStartTimeFrom && !checkEndTimeTo) {
+                alert("Please select start and end time!");
+                return;
+            } else {
+                var timeRange = checkTimeRange(checkStartTimeFrom, checkEndTimeTo);
+                if (timeRange == false) {
+                    alert("slot booking is avaliable between start (9.00) and end time (22.00)!");
+                    return;
+                } else {
+                    if (checkStartTimeFrom > checkEndTimeTo) {
+                        alert("Selected start slot time is less than end slot time! Please try again");
+                        return;
+                    } else {
+                        if (DbStartTime.length == 0 && DbEndTime.length == 0) {
+                            var form = document.getElementById("trufregisterForm");
+                            form.submit();
+                        } else {
+                            var checkStartTimeExist = isBetween(checkStartTimeFrom, DbStartTime, DbEndTime);
+                            var checkEndTimeToExist = isBetween(checkEndTimeTo, DbStartTime, DbEndTime);
+                            if (checkStartTimeExist && checkEndTimeToExist) {
+                                alert("Slot is free to book.");
+                                var form = document.getElementById("trufregisterForm");
+                                form.submit();
+                            } else {
+                                alert("Selected slot time is already booked. please select a different time slot");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        function isBetween(checkDateTime, DbStartTime, DbEndTime) {
+            var isAvailable;
+            for (i = 0; i < DbStartTime.length; i++) {
+                if (checkDateTime > DbStartTime[i] && checkDateTime <= DbEndTime[i]) {
+                    isAvailable = false;
+                    break;
+                } else {
+                    isAvailable = true;
+                }
+            }
+            return isAvailable;
+        }
+        function checkTimeRange(checkStartTimeFrom, checkEndTimeTo) {
+            if (checkStartTimeFrom > "09.00" && checkEndTimeTo < "22.00") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form id="trufregisterForm" method="post" action="RegistrationAdd">
+        <div class="form-design">
+            @if (!string.IsNullOrWhiteSpace(registrationErrorMessage))
+            {
+                <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                    <strong>@registrationErrorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 class="form-heading">Truf Booking</h1>
+
+            <input type="hidden" id="Turftype" name="Turftype" value="@Turftype" />
+
+            <div>
+                <label>UserName:</label>
+                <input type="text" class="form-control" id="Username" name="Username" value="@Model.userModel.Name" readonly />
+            </div>
+
+            <div>
+                <label>Phone Number:</label>
+                <input type="tel" class="form-control" id="Phone" name="Phone" value="@Model.userModel.Phone" readonly />
+            </div>
+
+            <div>
+                <label>Email:</label>
+                <input type="email" class="form-control" id="Email" name="Email" value="@Model.userModel.Email" readonly />
+            </div>
+
+            <div>
+                <label>Booking Date:</label>
+                <input type="text" class="form-control" id="Date" name="Date" value="@userDate" readonly />
+            </div>
+
+            <div>
+                <label>Select Starting Time:</label>
+                <input type="time" step="3600" class="form-control" id="Starttime" name="Starttime" asp-for="Starttime" required />
+            </div>
+
+            <div>
+                <label>Select End Time:</label>
+                <input type="time" step="3600" class="form-control" id="Endtime" name="Endtime" asp-for="Endtime" required />
+            </div>
+
+            <button type="button" onclick="checkTime();" class="login-submit">Book</button>
+        </div>
+    </form>
+</body>
+</html>

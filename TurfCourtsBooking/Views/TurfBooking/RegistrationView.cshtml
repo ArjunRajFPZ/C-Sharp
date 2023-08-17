@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TurfCourtsBooking.Models.TurfBookingModel>
+
+@{
+    int count = 0;
+    var registrationSuccessMessage = TempData["registrationSuccessMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/registration.css" rel="stylesheet" />
+</head>
+<body>
+    <form>
+        <div>
+            @if (!string.IsNullOrWhiteSpace(registrationSuccessMessage))
+            {
+                <div class="alert alert-dismissible alert-primary" style="margin-top: 20px" role="alert">
+                    <strong>@registrationSuccessMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 align="center">Booking View</h1><br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Booking Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Turf Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var booking in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@booking.Username</td>
+                                <td>@booking.Phone</td>
+                                <td>@booking.Email</td>
+                                <td>@booking.Date</td>
+                                <td>@booking.Starttime</td>
+                                <td>@booking.Endtime</td>
+                                <td>@booking.Turftype</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">
+                                <div>
+                                    No data found!
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+

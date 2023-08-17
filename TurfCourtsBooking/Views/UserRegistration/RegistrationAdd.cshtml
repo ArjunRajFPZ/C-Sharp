@@ -1,0 +1,67 @@
+﻿@model TurfCourtsBooking.Models.RegistrationModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var errorRegistrationMessage = TempData["errorRegistrationMessage"]?.ToString();
+}
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/registrationValidation.js"></script>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="registerForm" method="post" action="RegistrationAdd">
+        <div class="form-design">
+            @if (!string.IsNullOrWhiteSpace(errorRegistrationMessage))
+            {
+                <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                    <strong>@errorRegistrationMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 class="form-heading">Create a new account</h1>
+
+            <div>
+                <label>Enter Name:</label>
+                <input type="text" class="form-control" id="Name" name="Name" placeholder="Name" asp-for="Name" required />
+            </div>
+
+            <div>
+                <label>Enter Date of Birth:</label>
+                <input type="date" class="form-control" id="Dateofbirth" name="Dateofbirth" asp-for="Dateofbirth" required />
+            </div>
+
+            <div>
+                <label>Enter Phone Number:</label>
+                <input type="tel" class="form-control" id="Phone" name="Phone" pattern="[0-9]{10}" placeholder="0123456789" asp-for="Phone" required />
+            </div>
+
+            <div>
+                <label>Enter Address:</label>
+                <textarea rows="4" cols="50" id="Address" name="Address" asp-for="Address" required></textarea>
+            </div>
+
+            <div>
+                <label>Enter Email:</label>
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="eg:-abc@xyz.com" asp-for="Email" required />
+            </div>
+
+            <div>
+                <label>Enter Password:</label>
+                <input type="password" class="form-control" id="Password" name="Password" minlength="8" asp-for="Password" required />
+            </div>
+
+            <div>
+                <label>Enter Confirm Password:</label>
+                <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" minlength="8" required />
+            </div>
+
+            <input type="submit" value="Register" />
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿@model TurfCourtsBooking.Models.VenueModel
+
+@{
+    var registrationErrorMessage = TempData["registrationErrorMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="VenueForm" style="justify-content: center; display: flex;" method="post" action="~/Venue/VenueEdit">
+        @if (!string.IsNullOrWhiteSpace(registrationErrorMessage))
+        {
+            <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                <strong>@registrationErrorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    <div class="form-design">
+        <h1 class="form-heading">Venue Edit</h1>
+
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div>
+            <label>Enter Venue Name:</label>
+            <input type="text" class="form-control" id="Venuename" name="Venuename" placeholder="Venue Name" value="@Model.Venuename" required />
+        </div>
+
+        <div>
+            <label>Select Type Of Turf:</label>
+            <select id="Turftype" name="Turftype" asp-for="Turftype" value="@Model.Turftype" required>
+                <option value="Indoor Turf">Indoor Turf</option>
+                <option value="Outdoor Turf">Outdoor Turf</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Venue Status:</label>
+            <select id="Venuestatus" name="Venuestatus" asp-for="Venuestatus" value="@Model.Venuestatus" required>
+                <option value="Active" selected>Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+
+        <label>Select Truf Photo:</label>
+        <div>
+            <input type="file" id="Photo" name="Photo" asp-for="Photo" value="@Model.Photo" required><br />
+        </div>
+
+        <input type="submit" value="Update Venue" />
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,116 @@
+﻿@model TurfCourtsBooking.MultiViewModel.TurfViewAndAddUserDetails
+
+@{
+}
+<html>
+<head>
+    <link href="~/Content/custom1.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+            $('#inDoorDate').attr('min', today);
+            $('#outDoorDate').attr('min', today);
+        } 
+        function dateCheck() {
+            var checkDate = document.getElementById("outDoorDate").value;
+            var date = new Date(checkDate);
+            var month = date.getMonth();
+            if (!checkDate) {
+                alert("Please select start and end time!");
+                return;
+            } else {
+                if ([4, 5, 10, 11].includes(month)) {
+                    alert("Booking of outdoor turf is not permitted during the months of (May, June, November, December), due to unfavourable weather conditions!");
+                    return;
+                } else {
+                    var form = document.getElementById("dateCheckFormOutdoor");
+                    form.submit();
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h1 class="form-heading">Turf</h1><br />
+        <div class="row row-cols-1 row-cols-md-2">
+            @foreach (var venue in Model.venueModel)
+            {
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="img-size" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">@venue.Venuename</h4>
+                            <p class="card-text">@venue.Turftype</p>
+                            <form id="dateCheckFormIndoor" method="post" action="~/TurfBooking/RegistrationAddView">
+                                <input type="hidden" id="Turftype" name="Turftype" value="Indoor" />
+                                <div>
+                                    <label>Select a date:</label>
+                                    <input type="date" class="form-control" id="inDoorDate" name="Date" asp-for="Date" required />
+                                </div>
+                                <button type="submit" class="login-submit">Book Turf</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!--<div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="img-size" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">INDOOR TURF</h4>
+                            <p class="card-text">Card body</p>
+                    <form id="dateCheckFormIndoor" method="post" action="~/TurfBooking/RegistrationAddView">
+                        <input type="hidden" id="Turftype" name="Turftype" value="Indoor" />
+                        <div>
+                            <label>Select a date:</label>
+                            <input type="date" class="form-control" id="inDoorDate" name="Date" asp-for="Date" required />
+                        </div>
+                        <button type="submit" class="login-submit">Book Turf</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card">
+                    <div class="view overlay">
+                        <img class="img-size" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">OUTDOOR TURF</h4>
+                        <p class="card-text">Card body</p>
+                        <form id="dateCheckFormOutdoor" method="post" action="~/TurfBooking/RegistrationAddView">
+                            <input type="hidden" id="Turftype" name="Turftype" value="Outdoor" />
+                            <div>
+                                <label>Select a date:</label>
+                                <input type="date" class="form-control" id="outDoorDate" name="Date" asp-for="Date" required />
+                            </div>
+                            <button type="button" class="login-submit" onclick="dateCheck();">Book Turf</button>
+                        </form>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</body>
+</html>

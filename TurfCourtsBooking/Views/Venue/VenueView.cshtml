@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TurfCourtsBooking.Models.VenueModel>
+
+@{
+    int count = 0;
+    var registrationSuccessMessage = TempData["registrationSuccessMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/registration.css" rel="stylesheet" />
+</head>
+<body>
+    <form>
+        <div>
+            @if (!string.IsNullOrWhiteSpace(registrationSuccessMessage))
+            {
+                <div class="alert alert-dismissible alert-primary" style="margin-top: 20px" role="alert">
+                    <strong>@registrationSuccessMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 align="center">Booking View</h1><br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Venuename</th>
+                        <th>Turftype</th>
+                        <th>Photo</th>
+                        <th>Venuestatus</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var venue in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@venue.Venuename</td>
+                                <td>@venue.Turftype</td>
+                                <td>@venue.Photo</td>
+                                <td>@venue.Venuestatus</td>
+                                <td>
+                                    <a class="btn btn-primary" style="border-radius: 5px" runat="server" href="~/Venue/VenueEditView/@venue.Id">Edit</a>
+                                    <a class="btn btn-danger" style="border-radius: 5px" runat="server" href="~/Venue/VenueDelete/@venue.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">
+                                <div>
+                                    No data found!
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+

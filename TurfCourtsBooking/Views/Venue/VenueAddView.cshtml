@@ -1,0 +1,44 @@
+﻿
+@{
+    var registrationErrorMessage = TempData["registrationErrorMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="VenueForm" method="post" action="VenueAdd">
+        @if (!string.IsNullOrWhiteSpace(registrationErrorMessage))
+        {
+            <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                <strong>@registrationErrorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <div class="form-design">
+            <h1 class="form-heading">Venue Add</h1>
+
+            <div>
+                <label>Enter Venue Name:</label>
+                <input type="text" class="form-control" id="Venuename" name="Venuename" placeholder="Venue Name" asp-for="Venuename" required />
+            </div>
+
+            <div>
+                <label>Select Type Of Turf:</label>
+                <select id="Turftype" name="Turftype" asp-for="Turftype" required>
+                    <option value="" disabled selected>select your option</option>
+                    <option value="Indoor Turf">Indoor Turf</option>
+                    <option value="Outdoor Turf">Outdoor Turf</option>
+                </select>
+            </div>
+
+            <label>Select Truf Photo:</label>
+            <div>
+                <input type="file" id="Photo" name="Photo" asp-for="Photo" required><br />
+            </div>
+
+            <input type="submit" value="Add Venue" />
+        </div>
+    </form>
+</body>
+</html>

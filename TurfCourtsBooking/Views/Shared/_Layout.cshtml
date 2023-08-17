@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/registration.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/registrationValidation.js"></script>
+    <title>@ViewBag.Title - My Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-green">
+        <div class="container" style="margin-left:100px">
+            <a class="main-heading"><strong>TURF</strong></a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.Identity.Name.Split('|')[0] == "Admin")
+                {
+                    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/"><strong>Home</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/TurfBooking/VenueView"><strong>Turf Booking</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/TurfBooking/RegistrationView"><strong>Booking View</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/Venue/VenueAddView"><strong>Venue Add</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/Venue/VenueView"><strong>Venue View</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/UserRegistration/RegistrationView"><strong>User View</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="navbar-nav justify-content-end">
+                            <li class="nav-item">
+                                <a class="btn btn-primary" style="border-radius: 20px" runat="server" href="~/Home/Logout"><strong>Logout</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/"><strong>Home</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/TurfBooking/VenueView"><strong>Turf Booking</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" runat="server" href="~/TurfBooking/RegistrationView"><strong>Booking View</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="navbar-nav justify-content-end">
+                            <li class="nav-item">
+                                <a class="btn btn-primary" style="border-radius: 20px" runat="server" href="~/Home/Logout"><strong>Logout</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1"></ul>
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item" style="margin-right:5px">
+                            <a class="btn btn-primary" style="border-radius: 20px" runat="server" href="~/Home/Login"><strong>Login</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" style="border-radius: 20px" runat="server" href="~/UserRegistration/RegistrationAdd"><strong>Register</strong></a>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
