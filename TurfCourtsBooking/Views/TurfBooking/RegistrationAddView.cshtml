@@ -4,13 +4,17 @@
     var registrationErrorMessage = TempData["registrationErrorMessage"]?.ToString();
     var userDate = Convert.ToDateTime(TempData["userDate"]).Date.ToString("dd-MM-yyyy");
     var Turftype = TempData["Turftype"]?.ToString();
-    List<string> checkStartTime = new List<string>();
-    List<string> checkEndTime = new List<string>();
+    List<string> slots = new List<string>();
     foreach (var checklist in Model.turfBookingModel)
     {
-        checkStartTime.Add(checklist.Starttime);
-        checkEndTime.Add(checklist.Endtime);
+        slots.Add(checklist.Slots);
     }
+    string result = "";
+    for (int i = 0; i < slots.Count; i++)
+    {
+        result = result + slots[i] + ",";
+    }
+    string[] slotsList = result.Split(',');
 }
 
 <html>
@@ -19,70 +23,33 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript">        
-        function checkTime() {
-            var checkStartTimeFrom = document.getElementById("Starttime").value;
-            var checkEndTimeTo = document.getElementById("Endtime").value;
-            var convertstarttime = '@Html.Raw(Json.Encode(checkStartTime))';
-            var convertendtime = '@Html.Raw(Json.Encode(checkEndTime))';
-            var DbStartTime = JSON.parse(convertstarttime);
-            var DbEndTime = JSON.parse(convertendtime);            
-
-            if (!checkStartTimeFrom && !checkEndTimeTo) {
-                alert("Please select start and end time!");
+    <script type="text/javascript">
+        function checkSlot() {
+            var sport = document.getElementById("Sport").value;            
+            if (sport == "select your option") {
+                alert("Please select a sport!");
                 return;
             } else {
-                var timeRange = checkTimeRange(checkStartTimeFrom, checkEndTimeTo);
-                if (timeRange == false) {
-                    alert("slot booking is avaliable between start (9.00) and end time (22.00)!");
-                    return;
-                } else {
-                    if (checkStartTimeFrom > checkEndTimeTo) {
-                        alert("Selected start slot time is less than end slot time! Please try again");
-                        return;
-                    } else {
-                        if (DbStartTime.length == 0 && DbEndTime.length == 0) {
-                            var form = document.getElementById("trufregisterForm");
-                            form.submit();
-                        } else {
-                            var checkStartTimeExist = isBetween(checkStartTimeFrom, DbStartTime, DbEndTime);
-                            var checkEndTimeToExist = isBetween(checkEndTimeTo, DbStartTime, DbEndTime);
-                            if (checkStartTimeExist && checkEndTimeToExist) {
-                                alert("Slot is free to book.");
-                                var form = document.getElementById("trufregisterForm");
-                                form.submit();
-                            } else {
-                                alert("Selected slot time is already booked. please select a different time slot");
-                                return;
-                            }
-                        }
+                var result = 0;
+                var checkboxes = document.getElementsByName('SlotId');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        result++;
                     }
                 }
-            }
-        }
-        function isBetween(checkDateTime, DbStartTime, DbEndTime) {
-            var isAvailable;
-            for (i = 0; i < DbStartTime.length; i++) {
-                if (checkDateTime > DbStartTime[i] && checkDateTime <= DbEndTime[i]) {
-                    isAvailable = false;
-                    break;
+                if (result > 0) {
+                    var form = document.getElementById("trufregisterForm");
+                    form.submit();
                 } else {
-                    isAvailable = true;
+                    alert("Please select a time slot!");
+                    return;
                 }
-            }
-            return isAvailable;
-        }
-        function checkTimeRange(checkStartTimeFrom, checkEndTimeTo) {
-            if (checkStartTimeFrom > "09.00" && checkEndTimeTo < "22.00") {
-                return true;
-            } else {
-                return false;
             }
         }
     </script>
 </head>
 <body>
-    <form id="trufregisterForm" method="post" action="RegistrationAdd">
+    <form id="trufregisterForm" style="display: flex; justify-content: center;" method="post" action="RegistrationAdd">
         <div class="form-design">
             @if (!string.IsNullOrWhiteSpace(registrationErrorMessage))
             {
@@ -116,16 +83,40 @@
             </div>
 
             <div>
-                <label>Select Starting Time:</label>
-                <input type="time" step="3600" class="form-control" id="Starttime" name="Starttime" asp-for="Starttime" required />
+                <label>Select Sport:</label>
+                <select id="Sport" name="Sport" asp-for="Sport" required>
+                    <option disabled selected>select your option</option>
+                    @foreach (var sport in Model.sportModel)
+                    {
+                        <option value="@sport.Name">@sport.Name</option>
+                    }
+                </select>
             </div>
 
-            <div>
-                <label>Select End Time:</label>
-                <input type="time" step="3600" class="form-control" id="Endtime" name="Endtime" asp-for="Endtime" required />
+            <label>Select Time Slot:</label>
+            <div class="checkbox-container">
+                @foreach (var timeSlot in Model.timeSlotModel)
+                {
+                    if (slotsList.Contains(timeSlot.SlotTime.ToString()))
+                    {
+                        <div class="checkbox-notselect check">
+                            <label>
+                                <input type="checkbox" readonly><span>@timeSlot.SlotTime</span>
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="checkbox history">
+                            <label>
+                                <input type="checkbox" id="SlotId" name="SlotId" value="@timeSlot.SlotTime"><span>@timeSlot.SlotTime</span>
+                            </label>
+                        </div>
+                    }
+                }
             </div>
 
-            <button type="button" onclick="checkTime();" class="login-submit">Book</button>
+            <button type="button" onclick="checkSlot();" class="login-submit">Book Turf</button>
         </div>
     </form>
 </body>

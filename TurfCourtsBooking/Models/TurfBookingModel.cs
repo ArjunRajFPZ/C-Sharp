@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TurfCourtsBooking.Models
 {
@@ -9,8 +10,9 @@ namespace TurfCourtsBooking.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime Date { get; set; }
-        public string Starttime { get; set; }
-        public string Endtime { get; set; }
+        public string Sport { get; set; }
+        public List<string> SlotId { get; set; }
+        public string Slots { get; set; }
         public string Turftype { get; set; }
     }
 }

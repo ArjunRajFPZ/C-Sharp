@@ -1,8 +1,10 @@
-﻿@model IEnumerable<TurfCourtsBooking.Models.VenueModel>
+﻿@model IEnumerable<TurfCourtsBooking.Models.HolidayModel>
 
 @{
     int count = 0;
     var registrationSuccessMessage = TempData["registrationSuccessMessage"]?.ToString();
+    var deletionSuccessMessage = TempData["deletionSuccessMessage"]?.ToString();
+    var deletionErrorMessage = TempData["deletionErrorMessage"]?.ToString();
 }
 <html>
 <head>
@@ -18,31 +20,42 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             }
-            <h1 align="center">Venue View</h1><br />
+            else if (!string.IsNullOrWhiteSpace(deletionErrorMessage))
+            {
+                <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                    <strong>@deletionErrorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (!string.IsNullOrWhiteSpace(deletionSuccessMessage))
+            {
+                <div class="alert alert-dismissible alert-primary" style="margin-top: 20px" role="alert">
+                    <strong>@deletionSuccessMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 align="center">Holiday View</h1><br />
             <table>
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Venuename</th>
-                        <th>Turftype</th>
-                        <th>Venuestatus</th>
+                        <th>StartDate</th>
+                        <th>EndDate</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        foreach (var venue in Model)
+                        foreach (var holiday in Model)
                         {
                             count++;
                             <tr>
                                 <td>@count</td>
-                                <td>@venue.Venuename</td>
-                                <td>@venue.Turftype</td>
-                                <td>@venue.Venuestatus</td>
+                                <td>@holiday.StartDate.ToString("dd/MM/yyyy")</td>
+                                <td>@holiday.EndDate.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a class="btn btn-primary" style="border-radius: 5px" runat="server" href="~/Venue/VenueEditView/@venue.Id">Edit</a>
-                                    <a class="btn btn-danger" style="border-radius: 5px" runat="server" href="~/Venue/VenueDelete/@venue.Id">Delete</a>
+                                    <a class="btn btn-danger" style="border-radius: 5px" runat="server" href="~/Holiday/HolidayDelete/@holiday.Id">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -50,7 +63,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="6">
+                            <td colspan="4">
                                 <div>
                                     No data found!
                                 </div>

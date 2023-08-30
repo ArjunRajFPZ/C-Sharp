@@ -7,7 +7,7 @@
     <link href="~/Content/custom.css" rel="stylesheet" />
 </head>
 <body>
-    <form id="VenueForm" style="display: flex; justify-content: center;" method="post" action="VenueAdd">
+    <form id="SportsForm" style="display: flex; justify-content: center;" method="post" action="SportsAdd">
         @if (!string.IsNullOrWhiteSpace(registrationErrorMessage))
         {
             <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
@@ -16,11 +16,11 @@
             </div>
         }
         <div class="form-design">
-            <h1 class="form-heading">Venue Add</h1>
+            <h1 class="form-heading">Sport Add</h1>
 
             <div>
-                <label>Enter Venue Name:</label>
-                <input type="text" class="form-control" id="Venuename" name="Venuename" placeholder="Venue Name" asp-for="Venuename" required />
+                <label>Enter Sport Name:</label>
+                <input type="text" class="form-control" id="Name" name="Name" placeholder="Sport Name" asp-for="Name" required />
             </div>
 
             <div>
@@ -32,7 +32,7 @@
                 </select>
             </div>
 
-            <input type="submit" value="Add Venue" />
+            <input type="submit" value="Add Sport" />
         </div>
     </form>
 </body>

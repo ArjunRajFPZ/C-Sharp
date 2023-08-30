@@ -1,0 +1,34 @@
+﻿@{
+    var timeSlotErrorMessage = TempData["timeSlotErrorMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/custom1.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="TimeSlotForm" method="post" style="display: flex; justify-content: center;" action="TimeSlotAdd">
+        @if (!string.IsNullOrWhiteSpace(timeSlotErrorMessage))
+        {
+            <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                <strong>@timeSlotErrorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <div class="form-design">
+            <h1 class="form-heading">TimeSlot Add</h1>
+
+            <div>
+                <label>Enter Slot Name:</label>
+                <input type="text" class="form-control" id="SlotName" name="SlotName" asp-for="SlotName" required />
+            </div>
+
+            <div>
+                <label>Enter Slot Time:</label>
+                <input type="text" class="form-control" id="SlotTime" name="SlotTime" asp-for="SlotTime" required />
+            </div>
+
+            <input type="submit" class="login-submit" value="Add TimeSlot" />
+        </div>
+    </form>
+</body>
+</html>

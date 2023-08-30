@@ -121,14 +121,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SportController.cs" />
+    <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Controllers\TurfBookingController.cs" />
     <Compile Include="Controllers\UserRegistrationController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
+    <Compile Include="Controllers\HolidayController.cs" />
     <Compile Include="DatabaseConnection\DatabaseConnection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HolidayModel.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\SportModel.cs" />
+    <Compile Include="Models\TimeSlotModel.cs" />
     <Compile Include="Models\TurfBookingModel.cs" />
     <Compile Include="Models\VenueModel.cs" />
     <Compile Include="MultiViewModel\TurfViewAndAddUserDetails.cs" />
@@ -196,6 +202,13 @@
     <Content Include="Views\Venue\VenueView.cshtml" />
     <Content Include="Views\Venue\VenueAddView.cshtml" />
     <Content Include="Views\Venue\VenueEditView.cshtml" />
+    <Content Include="Views\TurfBooking\RegistrationViewAdmin.cshtml" />
+    <Content Include="Views\Holiday\HolidayView.cshtml" />
+    <Content Include="Views\Holiday\HolidayAddView.cshtml" />
+    <Content Include="Views\Sport\SportsView.cshtml" />
+    <Content Include="Views\Sport\SportsAddView.cshtml" />
+    <Content Include="Views\Time\TimeSlotView.cshtml" />
+    <Content Include="Views\Time\TimeSlotAddView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

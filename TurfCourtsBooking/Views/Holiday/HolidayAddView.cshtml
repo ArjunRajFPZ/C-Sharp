@@ -1,0 +1,64 @@
+﻿@{
+    var registrationErrorMessage = TempData["registrationErrorMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/custom1.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+            $('#StartDate').attr('min', today);
+            $('#EndDate').attr('min', today);
+        } 
+        function checkDate() {
+            var startDate = document.getElementById("StartDate").value; 
+            var endDate = document.getElementById("EndDate").value;
+            if (startDate && endDate) {
+                if (startDate < endDate) {
+                    var form = document.getElementById("HolidayForm");
+                    form.submit();
+                } else {
+                    alert("Selected holiday start date is smaller than or equal to holiday end date!");
+                    return;
+                }
+            } else {
+                alert("Please select a start and end date for holiday!");
+                return;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form id="HolidayForm" method="post" style="display: flex; justify-content: center;" action="HolidayAdd">
+        @if (!string.IsNullOrWhiteSpace(registrationErrorMessage))
+        {
+            <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                <strong>@registrationErrorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    <div class="form-design">
+        <h1 class="form-heading">Holiday Add</h1>
+
+        <div>
+            <label>Enter Holiday Start Date:</label>
+            <input type="date" class="form-control" id="StartDate" name="StartDate" asp-for="StartDate" required />
+        </div>
+
+        <div>
+            <label>Enter Holiday End Date:</label>
+            <input type="date" class="form-control" id="EndDate" name="EndDate" asp-for="EndDate" required />
+        </div>
+
+        <button type="button" class="login-submit" onclick="checkDate();">Add Holiday</button>
+    </div>
+    </form>
+</body>
+</html>

@@ -5,6 +5,7 @@
 
 table {
     width: 100%;
+    margin-bottom: 20px;
 }
 
 td, th {
@@ -22,7 +23,4 @@ th {
     font-size: 25px;
     font-family: serif;
     margin-right: 20px;
-    background: #000000;
-    background: linear-gradient(to right, #000000, #434343);
-    -webkit-text-fill-color: transparent;
 }

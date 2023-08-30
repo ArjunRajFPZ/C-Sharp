@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.Helpers;
 using TurfCourtsBooking.Models;
 
 namespace TurfCourtsBooking.DatabaseConnection
@@ -131,6 +130,16 @@ namespace TurfCourtsBooking.DatabaseConnection
             int returnValue = 0;
             using (SqlConnection connection = new SqlConnection(connString))
             {
+                String str = "";
+                for (int i = 0; i <= booking.SlotId.Count - 1; i++){
+                    if (booking.SlotId.Count != 0){
+                        if (str == ""){
+                            str = booking.SlotId[i];
+                        }else{
+                            str += "," + booking.SlotId[i];
+                        }
+                    }
+                }
                 SqlCommand command = connection.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "BookingAdd";
@@ -138,8 +147,8 @@ namespace TurfCourtsBooking.DatabaseConnection
                 command.Parameters.AddWithValue("@Phone", booking.Phone);
                 command.Parameters.AddWithValue("@Email", booking.Email);
                 command.Parameters.AddWithValue("@Date", booking.Date);
-                command.Parameters.AddWithValue("@Starttime", booking.Starttime);
-                command.Parameters.AddWithValue("@Endtime", booking.Endtime);
+                command.Parameters.AddWithValue("@Sport", booking.Sport);
+                command.Parameters.AddWithValue("@SlotId", str);
                 command.Parameters.AddWithValue("@Turftype", booking.Turftype);
 
                 connection.Open();
@@ -175,8 +184,42 @@ namespace TurfCourtsBooking.DatabaseConnection
                         Phone = dataRow["Phone"].ToString(),
                         Email = dataRow["Email"].ToString(),
                         Date = Convert.ToDateTime(dataRow["Date"]).Date,
-                        Starttime = dataRow["Starttime"].ToString(),
-                        Endtime = dataRow["Endtime"].ToString(),
+                        Sport = dataRow["Sport"].ToString(),
+                        Slots = dataRow["SlotId"].ToString(),
+                        Turftype = dataRow["Turftype"].ToString(),
+                    });
+                }
+            }
+            return registerList;
+        }
+        #endregion
+
+        #region Booking View Admin
+        public List<TurfBookingModel> TurfBookingViewAdmin()
+        {
+            List<TurfBookingModel> registerList = new List<TurfBookingModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "AdminBookingView";
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    registerList.Add(new TurfBookingModel
+                    {
+                        Username = dataRow["Username"].ToString(),
+                        Phone = dataRow["Phone"].ToString(),
+                        Email = dataRow["Email"].ToString(),
+                        Date = Convert.ToDateTime(dataRow["Date"]).Date,
+                        Sport = dataRow["Sport"].ToString(),
+                        Slots = dataRow["SlotId"].ToString(),
                         Turftype = dataRow["Turftype"].ToString(),
                     });
                 }
@@ -186,14 +229,14 @@ namespace TurfCourtsBooking.DatabaseConnection
         #endregion
 
         #region Datewise Slot Details
-        public List<TurfBookingModel> CheckTimeSlot(TurfBookingModel datecheck)
+        public List<TurfBookingModel> CheckSlot(TurfBookingModel datecheck)
         {
             List<TurfBookingModel> checkList = new List<TurfBookingModel>();
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 SqlCommand command = connection.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "DateCheck";
+                command.CommandText = "SlotCheck";
                 command.Parameters.AddWithValue("@Date", datecheck.Date);
                 command.Parameters.AddWithValue("@Turftype", datecheck.Turftype);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -207,8 +250,7 @@ namespace TurfCourtsBooking.DatabaseConnection
                 {
                     checkList.Add(new TurfBookingModel
                     {
-                        Starttime = dataRow["Starttime"].ToString(),
-                        Endtime = dataRow["Endtime"].ToString(),
+                        Slots = dataRow["SlotId"].ToString(),
                     });
                 }
             }
@@ -251,7 +293,6 @@ namespace TurfCourtsBooking.DatabaseConnection
                 command.CommandText = "VenueAdd";
                 command.Parameters.AddWithValue("@Venuename", venue.Venuename);
                 command.Parameters.AddWithValue("@Turftype", venue.Turftype);
-                command.Parameters.AddWithValue("@Photo", venue.Photo);
                 command.Parameters.AddWithValue("@Venuestatus", Venuestatus);
 
                 connection.Open();
@@ -285,7 +326,6 @@ namespace TurfCourtsBooking.DatabaseConnection
                         Id = Convert.ToInt32(dataRow["Id"]),
                         Venuename = dataRow["Venuename"].ToString(),
                         Turftype = dataRow["Turftype"].ToString(),
-                        Photo = dataRow["Photo"].ToString(),
                         Venuestatus = dataRow["Venuestatus"].ToString(),
                     });
                 }
@@ -312,7 +352,6 @@ namespace TurfCourtsBooking.DatabaseConnection
                     venue.Id = Convert.ToInt32(reader["Id"]);
                     venue.Venuename = reader["Venuename"].ToString();
                     venue.Turftype = reader["Turftype"].ToString();
-                    venue.Photo = reader["Photo"].ToString(); ;
                     venue.Venuestatus = reader["Venuestatus"].ToString();
                 }
                 connection.Close();
@@ -333,7 +372,6 @@ namespace TurfCourtsBooking.DatabaseConnection
                 command.Parameters.AddWithValue("@Id", venue.Id);
                 command.Parameters.AddWithValue("@Venuename", venue.Venuename);
                 command.Parameters.AddWithValue("@Turftype", venue.Turftype);
-                command.Parameters.AddWithValue("@Photo", venue.Photo);
                 command.Parameters.AddWithValue("@Venuestatus", venue.Venuestatus);
 
                 connection.Open();
@@ -385,12 +423,248 @@ namespace TurfCourtsBooking.DatabaseConnection
                     {
                         Venuename = dataRow["Venuename"].ToString(),
                         Turftype = dataRow["Turftype"].ToString(),
-                        Photo = dataRow["Photo"].ToString(),
                     });
                 }
             }
             return venues;
         }
         #endregion
+
+        #region Holiday View
+        public List<HolidayModel> HolidayDataView()
+        {
+            List<HolidayModel> holidayList = new List<HolidayModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "HolidayView";
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    holidayList.Add(new HolidayModel
+                    {
+                        Id = Convert.ToInt32(dataRow["Id"]),
+                        StartDate = Convert.ToDateTime(dataRow["StartDate"]).Date,
+                        EndDate = Convert.ToDateTime(dataRow["EndDate"]).Date,
+                    });
+                }
+            }
+            return holidayList;
+        }
+        #endregion
+
+        #region Holiday Add
+        public bool HolidayDataAdd(HolidayModel holiday)
+        {
+            int returnValue = 0;
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "HolidayAdd";
+                command.Parameters.AddWithValue("@StartDate", holiday.StartDate);
+                command.Parameters.AddWithValue("@EndDate", holiday.EndDate);
+
+                connection.Open();
+                returnValue = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return returnValue > 0 ? true : false;
+        }
+        #endregion
+
+        #region Holiday Delete
+        public bool HolidayDataDelete(int id)
+        {
+            int returnvalue = 0;
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "HolidayDelete";
+                command.Parameters.AddWithValue("@Id", id);
+
+                connection.Open();
+                returnvalue = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return returnvalue > 0 ? true : false;
+        }
+        #endregion       
+
+        #region Sports View
+        public List<SportModel> SportDataAdd()
+        {
+            List<SportModel> sportList = new List<SportModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SportView";
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    sportList.Add(new SportModel
+                    {
+                        Id = Convert.ToInt32(dataRow["Id"]),
+                        Name = dataRow["Name"].ToString(),
+                        Turftype = dataRow["Turftype"].ToString(),
+                    });
+                }
+            }
+            return sportList;
+        }
+        #endregion
+
+        #region Sports Add
+        public bool SportsDataAdd(SportModel sport)
+        {
+            int returnValue = 0;
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SportAdd";
+                command.Parameters.AddWithValue("@Name", sport.Name);
+                command.Parameters.AddWithValue("@Turftype", sport.Turftype);
+
+                connection.Open();
+                returnValue = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return returnValue > 0 ? true : false;
+        }
+        #endregion
+
+        #region Sports Delete
+        public bool SportsDataDelete(int id)
+        {
+            int returnvalue = 0;
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SportDelete";
+                command.Parameters.AddWithValue("@Id", id);
+
+                connection.Open();
+                returnvalue = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return returnvalue > 0 ? true : false;
+        }
+        #endregion    
+
+        #region Check Sports
+        public List<SportModel> CheckSports(string Turftype)
+        {
+            List<SportModel> sportsList = new List<SportModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SportData";
+                command.Parameters.AddWithValue("@Turftype", Turftype);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    sportsList.Add(new SportModel
+                    {
+                        Name = dataRow["Name"].ToString(),
+                        Turftype = dataRow["Turftype"].ToString(),
+                    });
+                }
+            }
+            return sportsList;
+        }
+        #endregion
+
+        #region TimeSlot Add
+        public bool TimeSlotDataAdd(TimeSlotModel timeSlot)
+        {
+            int returnValue = 0;
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "TimeSlotAdd";
+                command.Parameters.AddWithValue("@SlotName", timeSlot.SlotName);
+                command.Parameters.AddWithValue("@SlotTime", timeSlot.SlotTime);
+
+                connection.Open();
+                returnValue = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return returnValue > 0 ? true : false;
+        }
+        #endregion
+
+        #region TimeSlot View
+        public List<TimeSlotModel> TimeSlotView()
+        {
+            List<TimeSlotModel> TimeSlot = new List<TimeSlotModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "TimeSlotView";
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    TimeSlot.Add(new TimeSlotModel
+                    {
+                        Id = Convert.ToInt32(dataRow["Id"]),
+                        SlotName = dataRow["SlotName"].ToString(),
+                        SlotTime = dataRow["SlotTime"].ToString(),
+                    });
+                }
+            }
+            return TimeSlot;
+        }
+        #endregion
+
+        #region TimeSlot Delete
+        public bool TimeSlotDataDelete(int id)
+        {
+            int returnvalue = 0;
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "TimeSlotDelete";
+                command.Parameters.AddWithValue("@Id", id);
+
+                connection.Open();
+                returnvalue = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return returnvalue > 0 ? true : false;
+        }
+        #endregion       
     }
 }

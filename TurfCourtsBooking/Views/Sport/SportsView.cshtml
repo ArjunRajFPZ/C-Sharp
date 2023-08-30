@@ -1,8 +1,9 @@
-﻿@model IEnumerable<TurfCourtsBooking.Models.VenueModel>
+﻿@model IEnumerable<TurfCourtsBooking.Models.SportModel>
 
 @{
     int count = 0;
     var registrationSuccessMessage = TempData["registrationSuccessMessage"]?.ToString();
+    var registrationErrorMessage = TempData["registrationErrorMessage"]?.ToString();
 }
 <html>
 <head>
@@ -18,31 +19,35 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             }
-            <h1 align="center">Venue View</h1><br />
+            else if (!string.IsNullOrWhiteSpace(registrationErrorMessage))
+            {
+                <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                    <strong>@registrationErrorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 align="center">Sports View</h1><br />
             <table>
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Venuename</th>
+                        <th>Name</th>
                         <th>Turftype</th>
-                        <th>Venuestatus</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        foreach (var venue in Model)
+                        foreach (var sports in Model)
                         {
                             count++;
                             <tr>
                                 <td>@count</td>
-                                <td>@venue.Venuename</td>
-                                <td>@venue.Turftype</td>
-                                <td>@venue.Venuestatus</td>
+                                <td>@sports.Name</td>
+                                <td>@sports.Turftype</td>
                                 <td>
-                                    <a class="btn btn-primary" style="border-radius: 5px" runat="server" href="~/Venue/VenueEditView/@venue.Id">Edit</a>
-                                    <a class="btn btn-danger" style="border-radius: 5px" runat="server" href="~/Venue/VenueDelete/@venue.Id">Delete</a>
+                                    <a class="btn btn-danger" style="border-radius: 5px" runat="server" href="~/Sport/SportsDelete/@sports.Id">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -50,7 +55,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="6">
+                            <td colspan="4">
                                 <div>
                                     No data found!
                                 </div>

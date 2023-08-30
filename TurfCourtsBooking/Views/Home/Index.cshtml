@@ -1,14 +1,23 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 <html>
+<head>
+    <style>
+        .heading {
+            margin-top: 40px;
+            font-size: 13vw;
+            font-family: serif;
+            display: flex;
+            justify-content: center;
+            color: #000000;
+        }
+    </style>
+</head>
 <body>
-    <main>
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-            </section>
-        </div>
-    </main>
+    <div class="text-center">
+        <h1 class="heading">Welcome To Turf Booking</h1>
+    </div>
 </body>
+
 </html>

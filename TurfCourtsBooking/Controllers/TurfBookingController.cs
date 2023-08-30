@@ -13,9 +13,11 @@ namespace TurfBookingController
         public ActionResult VenueView()
         {
             var venue = DatabaseConnection.VenueListView();
+            var holidayDetail = DatabaseConnection.HolidayDataView();
             TurfViewAndAddUserDetails venueData = new TurfViewAndAddUserDetails()
             {
-                venueModel = venue
+                venueModel = venue,
+                holidayModel = holidayDetail
             };
             return View(venueData);
         }
@@ -30,18 +32,30 @@ namespace TurfBookingController
         }
         #endregion
 
-        #region Turf Booking User Details
+        #region Turf Booking Admin View
+        public ActionResult RegistrationViewAdmin()
+        {
+            var registration = DatabaseConnection.TurfBookingViewAdmin();
+            return View(registration);
+        }
+        #endregion
+
+        #region Turf Booking Details
         public ActionResult RegistrationAddView(TurfBookingModel booking)
         {
             var userEmail = User.Identity.Name.Split('|')[1];
             var userDetails = DatabaseConnection.UserDetails(userEmail);
-            var checkList = DatabaseConnection.CheckTimeSlot(booking);
+            var checkList = DatabaseConnection.CheckSlot(booking);
+            var sportsList = DatabaseConnection.CheckSports(booking.Turftype);
+            var timeSlot = DatabaseConnection.TimeSlotView();
             TempData["userDate"] = booking.Date;
             TempData["Turftype"] = booking.Turftype;
             TurfViewAndAddUserDetails userdata = new TurfViewAndAddUserDetails()
             {
                 userModel = userDetails,
-                turfBookingModel = checkList
+                turfBookingModel = checkList,
+                sportModel = sportsList,
+                timeSlotModel = timeSlot
             };
             return View(userdata);
         }
@@ -54,7 +68,7 @@ namespace TurfBookingController
             bool result = DatabaseConnection.TurfBookingAdd(booking);
             if (result == true)
             {
-                TempData["registrationSuccessMessage"] = $"Successfully booked from {booking.Starttime} to {booking.Endtime}";
+                TempData["registrationSuccessMessage"] = $"Slot booked successful for {booking.Sport} {booking.Turftype} on {booking.Date.ToString("dd/MM/yyyy")}";
                 return RedirectToAction("RegistrationView");
             }
             else

@@ -1,6 +1,14 @@
 ﻿@model TurfCourtsBooking.MultiViewModel.TurfViewAndAddUserDetails
 
 @{
+    int count = 0;
+    List<string> checkStartDate = new List<string>();
+    List<string> checkEndDate = new List<string>();
+    foreach (var holidaylist in Model.holidayModel)
+    {
+        checkStartDate.Add(Convert.ToDateTime(holidaylist.StartDate).Date.ToString("yyyy-MM-dd"));
+        checkEndDate.Add(Convert.ToDateTime(holidaylist.EndDate).Date.ToString("yyyy-MM-dd"));
+    }
 }
 <html>
 <head>
@@ -14,35 +22,65 @@
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
-            today = yyyy + '-' + mm + '-' + dd;
-            $('#inDoorDate').attr('min', today);
-            $('#outDoorDate').attr('min', today);
-        } 
-        function dateCheck() {
-            var checkDate = document.getElementById("outDoorDate").value;
-            var date = new Date(checkDate);
-            var month = date.getMonth();
+            today = yyyy + '-' + mm + '-' + dd;            
+            var Dates = document.getElementsByName('Date');
+            for (var i = 0; i < Dates.length; i++) {
+                $('.Date').attr('min', today);
+            }
+        }
+        function dateCheck(checkcount) {
+            var count = checkcount;
+            var type = document.getElementsByName("Turftype")[count - 1].value;
+            var checkDate = document.getElementsByName("Date")[count - 1].value;
+            var convertstartdate = '@Html.Raw(Json.Encode(checkStartDate))';
+            var convertenddate = '@Html.Raw(Json.Encode(checkEndDate))';
+            var DbStartDate = JSON.parse(convertstartdate);
+            var DbEndDate = JSON.parse(convertenddate);
+
             if (!checkDate) {
-                alert("Please select start and end time!");
+                alert("Please select a date!");
                 return;
             } else {
-                if ([4, 5, 10, 11].includes(month)) {
-                    alert("Booking of outdoor turf is not permitted during the months of (May, June, November, December), due to unfavourable weather conditions!");
-                    return;
-                } else {
-                    var form = document.getElementById("dateCheckFormOutdoor");
+                if (type != "Outdoor Turf") {
+                    var form = document.getElementsByName("dateCheckForm")[count - 1];
                     form.submit();
+                } else {
+                    var checkStartTimeExist = isBetween(checkDate, DbStartDate, DbEndDate);
+                    if (checkStartTimeExist == false) {
+                        var text ="";
+                        for (var i = 0; i < DbStartDate.length; i++) {
+                            text += DbStartDate[i] + " <--> " + DbEndDate[i] + "\n";
+                        }
+                        alert("Booking of outdoor turf is not permitted during these period!\n" + text);
+                        return;
+                    } else {
+                        var form = document.getElementsByName("dateCheckForm")[count - 1];
+                        form.submit();
+                    }
                 }
             }
+        }
+        function isBetween(checkDate, DbStartDate, DbEndDate) {
+            var isAvailable;
+            for (i = 0; i < DbStartDate.length; i++){
+                if (DbStartDate[i] <= checkDate && checkDate <= DbEndDate[i]) {
+                    isAvailable = false;
+                    break;
+                } else {
+                    isAvailable = true;
+                }
+            }
+            return isAvailable;
         }
     </script>
 </head>
 <body>
     <div>
-        <h1 class="form-heading">Turf</h1><br />
+        <h1 class="form-heading">Turf Booking</h1><br />
         <div class="row row-cols-1 row-cols-md-2">
             @foreach (var venue in Model.venueModel)
             {
+                count++;
                 <div class="col mb-4">
                     <div class="card">
                         <div class="view overlay">
@@ -54,62 +92,19 @@
                         <div class="card-body">
                             <h4 class="card-title">@venue.Venuename</h4>
                             <p class="card-text">@venue.Turftype</p>
-                            <form id="dateCheckFormIndoor" method="post" action="~/TurfBooking/RegistrationAddView">
-                                <input type="hidden" id="Turftype" name="Turftype" value="Indoor" />
+                            <form id="dateCheckForm" name="dateCheckForm" method="post" action="~/TurfBooking/RegistrationAddView">
+                                <input type="hidden" id="Turftype" name="Turftype" value="@venue.Turftype" />
+                                <input type="hidden" id="count" name="count" value="@count" />
                                 <div>
                                     <label>Select a date:</label>
-                                    <input type="date" class="form-control" id="inDoorDate" name="Date" asp-for="Date" required />
+                                    <input type="date" id="Date" class="Date" name="Date" asp-for="Date" required />
                                 </div>
-                                <button type="submit" class="login-submit">Book Turf</button>
+                                <button type="button" class="login-submit" onclick="dateCheck(@count);">Book Turf</button>
                             </form>
                         </div>
                     </div>
                 </div>
             }
-            <!--<div class="col mb-4">
-                    <div class="card">
-                        <div class="view overlay">
-                            <img class="img-size" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp" alt="Card image cap">
-                            <a href="#!">
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">INDOOR TURF</h4>
-                            <p class="card-text">Card body</p>
-                    <form id="dateCheckFormIndoor" method="post" action="~/TurfBooking/RegistrationAddView">
-                        <input type="hidden" id="Turftype" name="Turftype" value="Indoor" />
-                        <div>
-                            <label>Select a date:</label>
-                            <input type="date" class="form-control" id="inDoorDate" name="Date" asp-for="Date" required />
-                        </div>
-                        <button type="submit" class="login-submit">Book Turf</button>
-                    </form>
-                </div>
-            </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card">
-                    <div class="view overlay">
-                        <img class="img-size" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp" alt="Card image cap">
-                        <a href="#!">
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">OUTDOOR TURF</h4>
-                        <p class="card-text">Card body</p>
-                        <form id="dateCheckFormOutdoor" method="post" action="~/TurfBooking/RegistrationAddView">
-                            <input type="hidden" id="Turftype" name="Turftype" value="Outdoor" />
-                            <div>
-                                <label>Select a date:</label>
-                                <input type="date" class="form-control" id="outDoorDate" name="Date" asp-for="Date" required />
-                            </div>
-                            <button type="button" class="login-submit" onclick="dateCheck();">Book Turf</button>
-                        </form>
-                    </div>
-                </div>
-            </div>-->
         </div>
     </div>
 </body>

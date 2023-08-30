@@ -6,15 +6,77 @@
     <link href="~/Content/registration.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Scripts/registrationValidation.js"></script>
     <title>@ViewBag.Title - My Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .new_navbar {
+            overflow: hidden;
+            opacity: 1;
+        }
+
+            .new_navbar a {
+                float: left;
+                font-size: 16px;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+        .new_dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+            .new_dropdown .new_dropbtn {
+                font-size: 16px;
+                border: 5px;
+                font-weight: bold;
+                outline: none;
+                color: black;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+
+            .new_navbar a:hover, .new_dropdown:hover .new_dropbtn {
+                background-color: inherit;
+            }
+
+        .new_dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .new_dropdown-content a {
+                float: none;
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+                .new_dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .new_dropdown:hover .new_dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-green">
         <div class="container" style="margin-left:100px">
-            <a class="main-heading"><strong>TURF</strong></a>
+            <strong style="font-size: 25px; font-family: serif; margin-right: 20px; color: #000000;">TURF</strong>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -24,27 +86,61 @@
                 if (User.Identity.Name.Split('|')[0] == "Admin")
                 {
                     <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" runat="server" href="~/"><strong>Home</strong></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" runat="server" href="~/TurfBooking/VenueView"><strong>Turf Booking</strong></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" runat="server" href="~/TurfBooking/RegistrationView"><strong>Booking View</strong></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" runat="server" href="~/Venue/VenueAddView"><strong>Venue Add</strong></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" runat="server" href="~/Venue/VenueView"><strong>Venue View</strong></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" runat="server" href="~/UserRegistration/RegistrationView"><strong>User View</strong></a>
-                            </li>
-                        </ul>
-                    </div>
+                        <div class="new_navbar">
+                            <a class="new_dropbtn" runat="server" href="~/"><strong>Home</strong></a>
+                            <div class="new_dropdown">
+                                <button class="new_dropbtn">
+                                    Turf
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="new_dropdown-content">
+                                    <a runat="server" href="~/TurfBooking/VenueView">Turf Booking</a>
+                                    <a runat="server" href="~/TurfBooking/RegistrationViewAdmin">Turf Booking View</a>
+                                </div>
+                            </div>
+                            <div class="new_dropdown">
+                                <button class="new_dropbtn">
+                                    Venue
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="new_dropdown-content">
+                                    <a runat="server" href="~/Venue/VenueAddView">Venue Add</a>
+                                    <a runat="server" href="~/Venue/VenueView">Venue View</a>
+                                </div>
+                            </div>
+                            <div class="new_dropdown">
+                                <button class="new_dropbtn">
+                                    Sports
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="new_dropdown-content">
+                                    <a runat="server" href="~/Sport/SportsAddView">Sports Add</a>
+                                    <a runat="server" href="~/Sport/SportsView">Sports View</a>
+                                </div>
+                            </div>
+                            <div class="new_dropdown">
+                                <button class="new_dropbtn">
+                                    Holiday
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="new_dropdown-content">
+                                    <a runat="server" href="~/Holiday/HolidayAddView">Holiday Add</a>
+                                    <a runat="server" href="~/Holiday/HolidayView">Holiday View</a>
+                                </div>
+                            </div>
+                            <div class="new_dropdown">
+                                <button class="new_dropbtn">
+                                    Time
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="new_dropdown-content">
+                                    <a runat="server" href="~/Time/TimeSlotAddView">TimeSlot Add</a>
+                                    <a runat="server" href="~/Time/TimeSlotView">TimeSlot View</a>
+                                </div>
+                            </div>
+                            <a class="new_dropbtn" runat="server" href="~/UserRegistration/RegistrationView"><strong>User View</strong></a>
+                        </div>
+                    </div>                    
                     <div>
                         <ul class="navbar-nav justify-content-end">
                             <li class="nav-item">

@@ -6,6 +6,21 @@
 <html>
 <head>
     <link href="~/Content/custom.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        function check() {
+            var status = document.getElementById("Venuestatus").value;
+            if (status == "select your option") {
+                alert("Please select venue status!");
+                return;
+            } else {
+                var form = document.getElementById("VenueForm");
+                form.submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <form id="VenueForm" style="justify-content: center; display: flex;" method="post" action="~/Venue/VenueEdit">
@@ -28,26 +43,19 @@
 
         <div>
             <label>Select Type Of Turf:</label>
-            <select id="Turftype" name="Turftype" asp-for="Turftype" value="@Model.Turftype" required>
-                <option value="Indoor Turf">Indoor Turf</option>
-                <option value="Outdoor Turf">Outdoor Turf</option>
-            </select>
+            <input type="text" class="form-control" id="Turftype" name="Turftype" value="@Model.Turftype" readonly />
         </div>
 
         <div>
             <label>Venue Status:</label>
             <select id="Venuestatus" name="Venuestatus" asp-for="Venuestatus" value="@Model.Venuestatus" required>
-                <option value="Active" selected>Active</option>
+                <option disabled selected>select your option</option>
+                <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
             </select>
         </div>
 
-        <label>Select Truf Photo:</label>
-        <div>
-            <input type="file" id="Photo" name="Photo" asp-for="Photo" value="@Model.Photo" required><br />
-        </div>
-
-        <input type="submit" value="Update Venue" />
+        <button type="button" onclick="check();" class="login-submit">Update Venue</button>
     </div>
     </form>
 </body>

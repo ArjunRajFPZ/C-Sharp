@@ -5,12 +5,12 @@
 }
 <html>
 <head>
+    <link href="~/Content/custom.css" rel="stylesheet" />
     <script type="text/javascript">
         function preventBack() { window.history.forward(); }
         setTimeout("preventBack()", 0);
         window.onunload = function () { null };
     </script>
-    <link href="~/Content/custom.css" rel="stylesheet" />
 </head>
 <body>
     <form id="account" method="post" action="Login">

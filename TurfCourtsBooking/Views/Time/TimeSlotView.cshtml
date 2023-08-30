@@ -1,0 +1,79 @@
+﻿@model IEnumerable<TurfCourtsBooking.Models.TimeSlotModel>
+
+@{
+    int count = 0;
+    var timeSlotSuccessMessage = TempData["timeSlotSuccessMessage"]?.ToString();
+    var deletionSuccessMessage = TempData["deletionSuccessMessage"]?.ToString();
+    var deletionErrorMessage = TempData["deletionErrorMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/registration.css" rel="stylesheet" />
+</head>
+<body>
+    <form>
+        <div>
+            @if (!string.IsNullOrWhiteSpace(timeSlotSuccessMessage))
+            {
+                <div class="alert alert-dismissible alert-primary" style="margin-top: 20px" role="alert">
+                    <strong>@timeSlotSuccessMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (!string.IsNullOrWhiteSpace(deletionErrorMessage))
+            {
+                <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                    <strong>@deletionErrorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (!string.IsNullOrWhiteSpace(deletionSuccessMessage))
+            {
+                <div class="alert alert-dismissible alert-primary" style="margin-top: 20px" role="alert">
+                    <strong>@deletionSuccessMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <h1 align="center">TimeSlot View</h1><br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Slot Name</th>
+                        <th>Slot Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var timeSlotList in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@timeSlotList.SlotName</td>
+                                <td>@timeSlotList.SlotTime</td>
+                                <td>
+                                    <a class="btn btn-danger" style="border-radius: 5px" runat="server" href="~/Time/TimeSlotDelete/@timeSlotList.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">
+                                <div>
+                                    No data found!
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+
