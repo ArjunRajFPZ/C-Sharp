@@ -16,26 +16,29 @@ namespace TimeController
         }
         #endregion
 
-        #region TimeSlot Add View
-        public ActionResult TimeSlotAddView()
+        #region TimeSlot Edit
+        [HttpGet]
+        public ActionResult TimeSlotEditView(int id)
         {
-            return View();
+            var timeSlot = DatabaseConnection.TimeSlotDataEdit(id);
+            return View(timeSlot);
         }
         #endregion
 
-        #region TimeSlot Add
-        public ActionResult TimeSlotAdd(TimeSlotModel timeSlot)
+        #region TimeSlot Update
+        [HttpPost]
+        public ActionResult TimeSlotUpdate(TimeSlotModel timeSlot)
         {
-            bool result = DatabaseConnection.TimeSlotDataAdd(timeSlot);
+            bool result = DatabaseConnection.TimeSlotDataUpdate(timeSlot);
             if (result == true)
             {
-                TempData["timeSlotSuccessMessage"] = $"Successfully Added Timeslot";
+                TempData["registrationSuccessMessage"] = "Venue updated successfully.";
                 return RedirectToAction("TimeSlotView");
             }
             else
             {
-                TempData["timeSlotErrorMessage"] = "Timeslot adding failed! Please try again.";
-                return RedirectToAction("TimeSlotAddView");
+                TempData["registrationErrorMessage"] = "Venue updation failed!";
+                return RedirectToAction("TimeSlotEditView");
             }
         }
         #endregion

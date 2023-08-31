@@ -47,7 +47,7 @@ namespace TurfBookingController
             var userDetails = DatabaseConnection.UserDetails(userEmail);
             var checkList = DatabaseConnection.CheckSlot(booking);
             var sportsList = DatabaseConnection.CheckSports(booking.Turftype);
-            var timeSlot = DatabaseConnection.TimeSlotView();
+            var timeSlot = DatabaseConnection.TimeSlotVenueView();
             TempData["userDate"] = booking.Date;
             TempData["Turftype"] = booking.Turftype;
             TurfViewAndAddUserDetails userdata = new TurfViewAndAddUserDetails()

@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -208,10 +209,11 @@
     <Content Include="Views\Sport\SportsView.cshtml" />
     <Content Include="Views\Sport\SportsAddView.cshtml" />
     <Content Include="Views\Time\TimeSlotView.cshtml" />
-    <Content Include="Views\Time\TimeSlotAddView.cshtml" />
+    <Content Include="Views\Time\TimeSlotEditView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

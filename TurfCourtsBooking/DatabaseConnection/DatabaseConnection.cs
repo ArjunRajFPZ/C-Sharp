@@ -11,6 +11,140 @@ namespace TurfCourtsBooking.DatabaseConnection
     {
         string connString = ConfigurationManager.ConnectionStrings["databaseconnection"].ToString();
 
+        #region Login
+        public RegistrationModel LoginCheck(string email, string password)
+        {
+            RegistrationModel check = new RegistrationModel();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "Login";
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Password", password);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    check.Email = reader["Email"].ToString();
+                    check.Usertype = reader["Usertype"].ToString();
+                }
+                connection.Close();
+            }
+            return check;
+        }
+        #endregion
+
+        #region Datewise Slot Details
+        public List<TurfBookingModel> CheckSlot(TurfBookingModel datecheck)
+        {
+            List<TurfBookingModel> checkList = new List<TurfBookingModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SlotCheck";
+                command.Parameters.AddWithValue("@Date", datecheck.Date);
+                command.Parameters.AddWithValue("@Turftype", datecheck.Turftype);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    checkList.Add(new TurfBookingModel
+                    {
+                        Slots = dataRow["SlotId"].ToString(),
+                    });
+                }
+            }
+            return checkList;
+        }
+        #endregion
+
+        #region Email Check
+        public RegistrationModel EmailCheck(RegistrationModel user)
+        {
+            RegistrationModel check = new RegistrationModel();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "EmailCheck";
+                command.Parameters.AddWithValue("@Email", user.Email);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    check.Email = reader["Email"].ToString();
+                }
+                connection.Close();
+            }
+            return check;
+        }
+        #endregion
+
+        #region Check Sports
+        public List<SportModel> CheckSports(string Turftype)
+        {
+            List<SportModel> sportsList = new List<SportModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SportData";
+                command.Parameters.AddWithValue("@Turftype", Turftype);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    sportsList.Add(new SportModel
+                    {
+                        Name = dataRow["Name"].ToString(),
+                        Turftype = dataRow["Turftype"].ToString(),
+                    });
+                }
+            }
+            return sportsList;
+        }
+        #endregion
+
+        #region User Data Retrieving
+        public RegistrationModel UserDetails(string email)
+        {
+            RegistrationModel userDetails = new RegistrationModel();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "userDetails";
+                command.Parameters.AddWithValue("@Email", email);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    userDetails.Name = reader["Name"].ToString();
+                    userDetails.Dateofbirth = Convert.ToDateTime(reader["Dateofbirth"]).Date;
+                    userDetails.Phone = reader["Phone"].ToString();
+                    userDetails.Email = reader["Email"].ToString();
+                }
+                connection.Close();
+            }
+            return userDetails;
+        }
+        #endregion
+
         #region User Add
         public bool UserDataAdd(RegistrationModel user)
         {
@@ -70,57 +204,6 @@ namespace TurfCourtsBooking.DatabaseConnection
                 }
             }
             return userList;
-        }
-        #endregion
-
-        #region User Data Retrieving
-        public RegistrationModel UserDetails(string email)
-        {
-            RegistrationModel userDetails = new RegistrationModel();
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "userDetails";
-                command.Parameters.AddWithValue("@Email", email);
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    userDetails.Name = reader["Name"].ToString();
-                    userDetails.Dateofbirth = Convert.ToDateTime(reader["Dateofbirth"]).Date;
-                    userDetails.Phone = reader["Phone"].ToString();
-                    userDetails.Email = reader["Email"].ToString();
-                }
-                connection.Close();
-            }
-            return userDetails;
-        }
-        #endregion
-
-        #region Login
-        public RegistrationModel LoginCheck(string email, string password)
-        {
-            RegistrationModel check = new RegistrationModel();
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "Login";
-                command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@Password", password);
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    check.Email = reader["Email"].ToString();
-                    check.Usertype = reader["Usertype"].ToString();
-                }
-                connection.Close();
-            }
-            return check;
         }
         #endregion
 
@@ -225,59 +308,6 @@ namespace TurfCourtsBooking.DatabaseConnection
                 }
             }
             return registerList;
-        }
-        #endregion
-
-        #region Datewise Slot Details
-        public List<TurfBookingModel> CheckSlot(TurfBookingModel datecheck)
-        {
-            List<TurfBookingModel> checkList = new List<TurfBookingModel>();
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "SlotCheck";
-                command.Parameters.AddWithValue("@Date", datecheck.Date);
-                command.Parameters.AddWithValue("@Turftype", datecheck.Turftype);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                DataTable dataTable = new DataTable();
-
-                connection.Open();
-                adapter.Fill(dataTable);
-                connection.Close();
-
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    checkList.Add(new TurfBookingModel
-                    {
-                        Slots = dataRow["SlotId"].ToString(),
-                    });
-                }
-            }
-            return checkList;
-        }
-        #endregion
-
-        #region Email Check
-        public RegistrationModel EmailCheck(RegistrationModel user)
-        {
-            RegistrationModel check = new RegistrationModel();
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "EmailCheck";
-                command.Parameters.AddWithValue("@Email", user.Email);
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    check.Email = reader["Email"].ToString();
-                }
-                connection.Close();
-            }
-            return check;
         }
         #endregion
 
@@ -568,56 +598,6 @@ namespace TurfCourtsBooking.DatabaseConnection
         }
         #endregion    
 
-        #region Check Sports
-        public List<SportModel> CheckSports(string Turftype)
-        {
-            List<SportModel> sportsList = new List<SportModel>();
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "SportData";
-                command.Parameters.AddWithValue("@Turftype", Turftype);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                DataTable dataTable = new DataTable();
-
-                connection.Open();
-                adapter.Fill(dataTable);
-                connection.Close();
-
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    sportsList.Add(new SportModel
-                    {
-                        Name = dataRow["Name"].ToString(),
-                        Turftype = dataRow["Turftype"].ToString(),
-                    });
-                }
-            }
-            return sportsList;
-        }
-        #endregion
-
-        #region TimeSlot Add
-        public bool TimeSlotDataAdd(TimeSlotModel timeSlot)
-        {
-            int returnValue = 0;
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "TimeSlotAdd";
-                command.Parameters.AddWithValue("@SlotName", timeSlot.SlotName);
-                command.Parameters.AddWithValue("@SlotTime", timeSlot.SlotTime);
-
-                connection.Open();
-                returnValue = command.ExecuteNonQuery();
-                connection.Close();
-            }
-            return returnValue > 0 ? true : false;
-        }
-        #endregion
-
         #region TimeSlot View
         public List<TimeSlotModel> TimeSlotView()
         {
@@ -641,6 +621,38 @@ namespace TurfCourtsBooking.DatabaseConnection
                         Id = Convert.ToInt32(dataRow["Id"]),
                         SlotName = dataRow["SlotName"].ToString(),
                         SlotTime = dataRow["SlotTime"].ToString(),
+                        SlotStatus = dataRow["SlotStatus"].ToString(),
+                    });
+                }
+            }
+            return TimeSlot;
+        }
+        #endregion
+
+        #region TimeSlot Venue View
+        public List<TimeSlotModel> TimeSlotVenueView()
+        {
+            List<TimeSlotModel> TimeSlot = new List<TimeSlotModel>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "TimeSlotVenueView";
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                connection.Open();
+                adapter.Fill(dataTable);
+                connection.Close();
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    TimeSlot.Add(new TimeSlotModel
+                    {
+                        Id = Convert.ToInt32(dataRow["Id"]),
+                        SlotName = dataRow["SlotName"].ToString(),
+                        SlotTime = dataRow["SlotTime"].ToString(),
+                        SlotStatus = dataRow["SlotStatus"].ToString(),
                     });
                 }
             }
@@ -666,5 +678,53 @@ namespace TurfCourtsBooking.DatabaseConnection
             return returnvalue > 0 ? true : false;
         }
         #endregion       
+
+        #region TimeSlot Edit
+        public TimeSlotModel TimeSlotDataEdit(int id)
+        {
+            TimeSlotModel timeSlot = new TimeSlotModel();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SlotIdView";
+                command.Parameters.AddWithValue("@Id", id);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    timeSlot.Id = Convert.ToInt32(reader["Id"]);
+                    timeSlot.SlotName = reader["SlotName"].ToString();
+                    timeSlot.SlotTime = reader["SlotTime"].ToString();
+                    timeSlot.SlotStatus = reader["SlotStatus"].ToString();
+                }
+                connection.Close();
+            }
+            return timeSlot;
+        }
+        #endregion
+
+        #region TimeSlot Update
+        public bool TimeSlotDataUpdate(TimeSlotModel timeSlot)
+        {
+            int returnvalue = 0;
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "TimeSlotIdUpdate";
+                command.Parameters.AddWithValue("@Id", timeSlot.Id);
+                command.Parameters.AddWithValue("@SlotName", timeSlot.SlotName);
+                command.Parameters.AddWithValue("@SlotTime", timeSlot.SlotTime);
+                command.Parameters.AddWithValue("@SlotStatus", timeSlot.SlotStatus);
+
+                connection.Open();
+                returnvalue = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return returnvalue > 0 ? true : false;
+        }
+        #endregion
     }
 }

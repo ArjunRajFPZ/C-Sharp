@@ -41,6 +41,7 @@
                         <th>Id</th>
                         <th>Slot Name</th>
                         <th>Slot Time</th>
+                        <th>Slot Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -54,7 +55,9 @@
                                 <td>@count</td>
                                 <td>@timeSlotList.SlotName</td>
                                 <td>@timeSlotList.SlotTime</td>
+                                <td>@timeSlotList.SlotStatus</td>
                                 <td>
+                                    <a class="btn btn-info" style="border-radius: 5px" runat="server" href="~/Time/TimeSlotEditView/@timeSlotList.Id">Edit</a>
                                     <a class="btn btn-danger" style="border-radius: 5px" runat="server" href="~/Time/TimeSlotDelete/@timeSlotList.Id">Delete</a>
                                 </td>
                             </tr>

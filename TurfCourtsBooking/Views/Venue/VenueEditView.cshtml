@@ -12,7 +12,7 @@
     <script type="text/javascript">
         function check() {
             var status = document.getElementById("Venuestatus").value;
-            if (status == "select your option") {
+            if (status == "") {
                 alert("Please select venue status!");
                 return;
             } else {
@@ -49,7 +49,7 @@
         <div>
             <label>Venue Status:</label>
             <select id="Venuestatus" name="Venuestatus" asp-for="Venuestatus" value="@Model.Venuestatus" required>
-                <option disabled selected>select your option</option>
+                <option value="" disabled selected>select your option</option>
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
             </select>

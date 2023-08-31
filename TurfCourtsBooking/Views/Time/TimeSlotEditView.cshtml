@@ -1,0 +1,62 @@
+﻿@model TurfCourtsBooking.Models.TimeSlotModel
+@{
+    var timeSlotErrorMessage = TempData["timeSlotErrorMessage"]?.ToString();
+}
+<html>
+<head>
+    <link href="~/Content/custom1.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        function check() {
+            var status = document.getElementById("SlotStatus").value;
+            if (status == "") {
+                alert("Please select TimeSlot status!");
+                return;
+            } else {
+                var form = document.getElementById("TimeSlotForm");
+                form.submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <form id="TimeSlotForm" method="post" style="display: flex; justify-content: center;" action="~/Time/TimeSlotUpdate">
+        @if (!string.IsNullOrWhiteSpace(timeSlotErrorMessage))
+        {
+            <div class="alert alert-dismissible alert-danger" style="margin-top: 20px" role="alert">
+                <strong>@timeSlotErrorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    <div class="form-design">
+        <h1 class="form-heading">TimeSlot Edit</h1>
+
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div>
+            <label>Enter Slot Name:</label>
+            <input type="text" class="form-control" id="SlotName" name="SlotName" value="@Model.SlotName" required />
+        </div>
+
+        <div>
+            <label>Enter Slot Time:</label>
+            <input type="text" class="form-control" id="SlotTime" name="SlotTime" value="@Model.SlotTime" required />
+        </div>
+
+
+        <div>
+            <label>TimeSlot Status:</label>
+            <select id="SlotStatus" name="SlotStatus" asp-for="SlotStatus" value="@Model.SlotStatus" required>
+                <option value="" disabled selected>select your option</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+
+        <button type="button" onclick="check();" class="login-submit">Update TimeSlot</button>
+    </div>
+    </form>
+</body>
+</html>
