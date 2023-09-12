@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+    <style>
+        #LoginForm {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="LoginForm" method="post" action="LoginCheck">
+        <div class="form-design">
+
+            <h1 class="form-heading">Login</h1>
+
+            <div>
+                <label>Enter Email:</label>
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="eg:-abc@xyz.com" asp-for="Email" required />
+            </div>
+
+            <div>
+                <label>Enter Password:</label>
+                <input type="password" class="form-control" id="Password" name="Password" minlength="8" asp-for="Password" required />
+            </div>
+
+            <input type="submit" style="margin-top:5px;width:100%;" value="Login" />
+        </div>
+    </form>
+</body>
+</html>

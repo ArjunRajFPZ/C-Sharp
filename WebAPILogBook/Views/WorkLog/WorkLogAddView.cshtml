@@ -1,0 +1,40 @@
+﻿<html>
+<head>
+    <style>
+        #registerForm {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="registerForm" method="post" action="WorkLogAdd">
+        <div class="form-design">
+
+            <h1 class="form-heading">Add Log</h1>
+
+            <div>
+                <label>Enter Name:</label>
+                <input type="text" class="form-control" id="UserName" name="UserName" placeholder="UserName" asp-for="UserName" required />
+            </div>
+
+            <div>
+                <label>Enter Date of Log:</label>
+                <input type="date" class="form-control" id="DateOfLog" name="DateOfLog" asp-for="DateOfLog" required />
+            </div>
+
+            <div>
+                <label>Enter Work Start time:</label>
+                <input type="time" class="form-control" id="StartTime" name="StartTime" asp-for="StartTime" required />
+            </div>
+
+            <div>
+                <label>Enter Work End time:</label>
+                <input type="time" class="form-control" id="EndTime" name="EndTime" asp-for="EndTime" required />
+            </div>
+
+            <input type="submit" style="margin-top:5px;width:100%;" value="Register" />
+        </div>
+    </form>
+</body>
+</html>

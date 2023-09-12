@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebAPILogBook.Models.WorkLogModel>
+@{
+    int count = 0;
+}
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        td, th {
+            border: 1.5px solid #000000;
+            padding: 8px;
+        }
+
+        th {
+            font-family: serif;
+            background-color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div>
+            <h1 align="center">Work Log View</h1><br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Date of Log</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var LogList in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@LogList.UserName</td>
+                                <td>@LogList.DateOfLog.ToString("dd/MM/yyyy")</td>
+                                <td>@LogList.StartTime</td>
+                                <td>@LogList.EndTime</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                <div>
+                                    No data found!
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
+
